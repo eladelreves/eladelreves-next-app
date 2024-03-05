@@ -18,18 +18,21 @@ export function Toolbar(){
 		<>
 			<header>
                 <nav>
-                    {links.map((link) => {
-                        return (
-                            <Link 
-                                key = {link.name}
-                                href = {link.href}
-                                className={ `${pathname === link.href ? '' : ''}` }
-                            >
-                                <span className={'icon-' + link.icon}></span>
-                                {link.name}
-                            </Link>
-                        )
-                    })}
+                    <ul>
+                        {links.map((link) => {
+                            return (
+                                <li key={link.name}> 
+                                    <Link 
+                                        href={link.href} 
+                                        className={pathname === link.href ? 'active' : ''}
+                                    >
+                                        <span className={'icon-' + link.icon}></span>
+                                        {link.name}
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
                 </nav>
             </header>
 		</>
