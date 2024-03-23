@@ -1,0 +1,68 @@
+'use client'
+
+import styles from './login.module.css'
+
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+
+import Password_input from '@components/password_input/Password_Input';
+import { login } from '@services/Auth';
+
+export default function Login() {
+    const [formData, setFormData] = useState({
+        loginEmail: '',
+        loginPassword: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        login(formData)
+    };
+
+    return (
+        <>
+            <div className={styles.sign_body}>
+                <Link id='backHome' href="/" className='icon-home1'></Link>
+
+                <div className={styles.sign_container}>
+                    <form className={styles.sign_form} onSubmit={handleSubmit}>
+                        <h2>Login</h2>
+                        <label htmlFor="loginEmail">Email</label>
+                        <input
+                            id='loginEmail'
+                            name='loginEmail'
+                            type="text"
+                            onChange={handleChange}
+                        />
+
+                        <label htmlFor="loginPassword">Contraseña</label>
+                        <Password_input handleChange={handleChange} name='loginPassword' />
+
+                        <Link href=''>¿Has olvidado la contraseña?</Link>
+
+                        <button type='submit'>Enviar</button>
+                    </form>
+
+                    <div className={styles.sign_logo}>
+                        <Image
+                            src='/media/png/logo_all_white.png'
+                            alt=""
+                            width={400}
+                            height={200}
+                        />
+                        <span id={styles.change_sign}>¿No tienes cuenta? <br /><br /> <Link href='/register'>Crear cuenta</Link></span>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
