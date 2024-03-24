@@ -38,7 +38,7 @@ export default function Login() {
                         <h2>Login</h2>
                         <label htmlFor="loginEmail">Email</label>
                         <input
-                            id='loginEmail'
+                            id={styles.loginEmail}
                             name='loginEmail'
                             type="text"
                             onChange={handleChange}

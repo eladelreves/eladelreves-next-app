@@ -74,7 +74,7 @@
     width: 80%;
 }
 
-.sign_form input[type="text"] {
+.sign_form #loginEmail, .sign_form #registerUsername, .sign_form #registerEmail {
     border: 1px solid;
     border-radius: 20px;
 

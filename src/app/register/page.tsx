@@ -54,7 +54,7 @@ export default function Register() {
                         <h2>Register</h2>
                         <label htmlFor="registerUsername">Nombre de Usuario</label>
                         <input
-                            id='registerUsername'
+                            id={styles.registerUsername}
                             name='registerUsername'
                             type="text"
                             onChange={handleChange}
@@ -62,7 +62,7 @@ export default function Register() {
 
                         <label htmlFor="registerEmail">Email</label>
                         <input
-                            id='registerEmail'
+                            id={styles.registerEmail}
                             name='registerEmail'
                             type="text"
                             onChange={handleChange}
