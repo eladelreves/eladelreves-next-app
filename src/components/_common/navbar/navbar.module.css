@@ -1,0 +1,93 @@
+#header_container {
+    border-bottom: 1px solid;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    height: 100px;
+    margin-bottom: 200px;
+    position: sticky;
+    top: 0;
+}
+
+#header_container h1 {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: unset;
+    gap: 10px;
+    margin-left: 50px;
+}
+
+#header_container img {
+    width: 50px;
+}
+
+#nav_bar {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(6, 1fr);
+    margin: auto;
+    width: 55%;
+}
+
+#nav_bar a {
+    display: flex;
+    text-decoration: none;
+    font-size: 20px;
+    gap: 5px;
+    color: black;
+    position: relative;
+    transition: all 0.7s;
+}
+
+#nav_bar a > img {
+    width: 25px;
+    height: 25px;
+}
+
+#nav_bar .actual_page,
+#nav_bar a:hover {
+    transform: scale(1.2);
+}
+
+/*
+----------------------------------------------------------------
+    Underline effect
+----------------------------------------------------------------
+*/
+#nav_bar a::after {
+    background-color: var(--elaGreen);
+    content: "";
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: width 0.7s;
+    width: 0;
+}
+
+#nav_bar .actual_page::after,
+#nav_bar a:hover::after {
+    width: 100%;
+}
+
+/*
+----------------------------------------------------------------
+    Responsive
+----------------------------------------------------------------
+*/
+@media (max-width: 1024px) {
+    #header_container {
+        justify-content: space-between;
+    }
+
+    #nav_bar {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1440px) {
+    #nav_bar a {
+        font-size: 15px;
+    }
+}

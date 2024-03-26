@@ -1,0 +1,23 @@
+.custom-file-upload {
+    display: inline-block;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Ocultar el input real */
+#file-upload {
+    display: none;
+}
+
+#image-preview {
+    width: 200px;
+    height: 200px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    background-size: cover;
+    background-position: center;
+}

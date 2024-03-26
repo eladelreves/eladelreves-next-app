@@ -1,11 +1,10 @@
 'use client'
 import { usePathname } from 'next/navigation'
 import { Inter } from "next/font/google";
-import { Toolbar } from '../components/_common/toolbar/Toolbar'
+import { Navbar } from '@components/_common/navbar/Navbar'
 import "./globals.css";
-import "../assets/media/icomoon/style.css";
 import { metadata } from './metadata';
-import { useEffect, useState } from 'react';
+import { UserProvider } from 'src/contexts/userContext';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +22,10 @@ export default function RootLayout({
                 <meta name="description" content={metadata.description} />
             </head>
             <body className={inter.className}>
-                {pathname !== '/login' && pathname !== '/register' && <Toolbar />}
-                {children}
+                <UserProvider>
+                    {pathname !== '/login' && pathname !== '/register' && <Navbar />}
+                    {children}
+                </UserProvider>
             </body>
         </html>
     );
