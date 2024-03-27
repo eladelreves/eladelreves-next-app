@@ -43,6 +43,7 @@
 #nav_bar a > img {
     width: 25px;
     height: 25px;
+    border-radius: 50%;
 }
 
 #nav_bar .actual_page,

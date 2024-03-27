@@ -33,7 +33,7 @@ export function Navbar() {
                         return (
                             <Link key={page.name}
                                 href={page.href}
-                                className={pathname === page.href ? 'actual_page' : ''}
+                                className={pathname === page.href ? styles.actual_page : ''}
                             >
 
                                 <img src={page.name === 'Perfil'
