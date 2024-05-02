@@ -1,8 +1,3 @@
-@font-face {
-  font-family: Poppins;
-  src: url(../assets/media/font/Poppins-Regular.ttf);
-}
-
 .elaGreen { color: var(--elaGreen); }
 
 .underline { text-decoration: underline; }
@@ -32,7 +27,6 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  font-family: Poppins;
 }
 
 .animate-on-scroll {

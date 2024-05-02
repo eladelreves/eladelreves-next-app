@@ -4,20 +4,20 @@ import styles from './navbar.module.css'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
+import { useNavbarScroll } from './useNavbarScroll';
 import { useUser } from 'src/contexts/userContext';
+
+import { Hamburger } from './hamburguer/Hamburger';
 
 export function Navbar() {
     const { user } = useUser();
-    console.log(user);
-
-
     const pathname = usePathname()
+    const { visible, showShadow } = useNavbarScroll();
 
     const pages = [
         { name: 'Home', href: '/', icon: 'home.svg' },
         { name: 'La Ela', href: '/laela', icon: 'laela.svg' },
-        { name: 'Blog', href: '/blog', icon: 'blog.svg' },
+        { name: 'Noticias', href: '/blog', icon: 'blog.svg' },
         { name: 'Únete', href: '/unete', icon: 'unete.svg' },
         { name: 'Del Revés', href: '/delreves', icon: 'delreves.svg' },
         user
@@ -27,7 +27,12 @@ export function Navbar() {
 
     return (
         <>
-            <header id={styles.header_container}>
+            <header id={styles.header_container} style={{
+                top: visible ? '0' : '-100px',
+                transition: 'top 0.3s ease-in-out',
+                boxShadow: showShadow ? '0px 4px 8px 0px rgba(0, 0, 0, 0.2)' : 'none'
+            }}>
+                <img src="/media/png/logo_horizontal.png" alt="" />
                 <nav id={styles.nav_bar}>
                     {pages.map((page) => {
                         return (
@@ -45,8 +50,8 @@ export function Navbar() {
                         )
                     })}
                 </nav>
+                <Hamburger />
             </header>
         </>
     )
-    //<li><img src={config.imagePath + 'logo_main.png'} alt="Logo Principal Ela del Revés" /></li>
 }

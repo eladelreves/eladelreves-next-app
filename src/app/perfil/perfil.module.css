@@ -1,0 +1,61 @@
+.custom-file-upload {
+    display: inline-block;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Ocultar el input real */
+#file-upload {
+    display: none;
+}
+
+#image-preview {
+    width: 200px;
+    height: 200px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    background-size: cover;
+    background-position: center;
+}
+
+#profile_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+    margin: auto;
+    width: 50%;
+}
+
+#profile_image {
+    border-radius: 50%;
+    position: relative;
+    height: 200px;
+    width: 200px;
+}
+
+#profile_image img:first-child {
+    border: 2px solid var(--elaGreen);
+	box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+#profile_image img:last-child {
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: all 0.7s;
+}
+
+#profile_image img:last-child:hover {
+	box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+}
