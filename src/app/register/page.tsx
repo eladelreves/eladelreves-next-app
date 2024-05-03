@@ -37,7 +37,9 @@ export default function Register() {
     return (
         <>
             <div className={styles.sign_body}>
-                <Link id='backHome' href="/" className='icon-home1'></Link>
+                <Link id={styles.back_home} href="/" className='icon-home1'>
+                    <img src="/icons/home.svg" alt="" />
+                </Link>
 
                 <div className={styles.sign_container} style={{ height: '600px' }}>
                     <div className={styles.sign_logo} style={{ height: '600px' }}>

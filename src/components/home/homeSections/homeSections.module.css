@@ -1,0 +1,35 @@
+.home_sections {
+    border-bottom: 3px solid rgb(227, 227, 227);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+    position: relative;
+
+    margin: auto;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    width: 80%;
+}
+
+.home_sections > h2 {
+    font-size: 25pt;
+}
+
+.home_sections > p {
+    font-size: 20px;
+    text-align: justify;
+}
+
+.home_sections > span {
+    font-size: 16pt;
+    text-align: center;
+}
+
+.home_sections > img {
+    filter: drop-shadow(16px 7px 10px #939393);
+    margin-bottom: 50px;
+    width: 100%;
+}

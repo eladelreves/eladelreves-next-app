@@ -31,7 +31,9 @@ export default function Login() {
     return (
         <>
             <div className={styles.sign_body}>
-                <Link id='backHome' href="/" className='icon-home1'></Link>
+                <Link id={styles.back_home} href="/" className='icon-home1'>
+                    <img src="/icons/home.svg" alt="" />
+                </Link>
 
                 <div className={styles.sign_container}>
                     <form className={styles.sign_form} onSubmit={handleSubmit}>

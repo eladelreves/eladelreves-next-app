@@ -5,11 +5,18 @@ import { Navbar } from '@components/_common/navbar/Navbar.jsx'
 import "./globals.css";
 import { metadata } from './metadata';
 import { UserProvider } from 'src/contexts/userContext';
+import { animateOnScroll } from '@services/animate-on-scroll'
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
     const pathname = usePathname()
+
+    useEffect(() => {
+        animateOnScroll();
+        console.log('renew');
+    }, [pathname]);
 
     return (
         <html lang="en">
