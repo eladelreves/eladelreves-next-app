@@ -1,0 +1,19 @@
+#videos_container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+
+    height: 720px;
+    margin: 50px auto;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    width: 500px;
+}
+
+#delreves_title {
+    font-size: 50px;
+    margin-top: 50px;
+    text-align: center;
+    color: black;
+}
