@@ -1,18 +1,22 @@
-'use client'
-
-import styles from './navbar.module.css'
-
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useNavbarScroll } from './useNavbarScroll';
 import { useUser } from 'src/contexts/userContext';
-
 import { Hamburger } from './hamburguer/Hamburger';
+import styles from './navbar.module.css';
+import { ThreeDots } from 'react-loader-spinner';
+import { Tooltip } from 'react-tooltip'
 
 export function Navbar() {
-    const { user } = useUser();
-    const pathname = usePathname()
+    const { user, handleLogout } = useUser();
+    const pathname = usePathname();
     const { visible, showShadow } = useNavbarScroll();
+    const [isLoading, setIsLoading] = useState(true);
+
+    setTimeout(() => {
+        setIsLoading(false);
+    }, 300);
 
     const pages = [
         { name: 'Home', href: '/', icon: 'home.svg' },
@@ -20,9 +24,11 @@ export function Navbar() {
         { name: 'Noticias', href: '/blog', icon: 'blog.svg' },
         { name: 'Únete', href: '/unete', icon: 'unete.svg' },
         { name: 'Del Revés', href: '/delreves', icon: 'delreves.svg' },
-        user
-            ? { name: 'Perfil', href: '/perfil', icon: user?.photoURL || '/icons/default.png' }
-            : { name: 'Login', href: '/login', icon: 'login.svg' }
+        isLoading
+            ? { name: 'Loading...' }
+            : user
+                ? { name: 'Perfil', href: '/perfil', icon: user?.photoURL || '/icons/default.png' }
+                : { name: 'Login', href: '/login', icon: 'login.svg' }
     ];
 
     return (
@@ -35,12 +41,28 @@ export function Navbar() {
                 <img src="/media/png/logo_horizontal.png" alt="" />
                 <nav id={styles.nav_bar}>
                     {pages.map((page) => {
+                        if (page.name === 'Loading...') {
+                            return (
+                                <ThreeDots
+                                    key={page.name}
+                                    visible={true}
+                                    height="35"
+                                    width="35"
+                                    color="#4fa94d"
+                                    radius="9"
+                                    ariaLabel="three-dots-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                />
+                            )
+                        }
+
                         return (
-                            <Link key={page.name}
+                            <Link id={page.name === 'Perfil' ? 'clickable' : ''}
+                                key={page.name}
                                 href={page.href}
                                 className={pathname === page.href ? styles.actual_page : ''}
                             >
-
                                 <img src={page.name === 'Perfil'
                                     ? page.icon
                                     : `/icons/${page.icon}`}
@@ -50,6 +72,9 @@ export function Navbar() {
                         )
                     })}
                 </nav>
+                <Tooltip anchorSelect="#clickable" clickable>
+                    <button onClick={handleLogout}>Cerrar Sesión</button>
+                </Tooltip>
                 <Hamburger />
             </header>
         </>

@@ -1,0 +1,62 @@
+#modalNavbar {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1100;
+    width: 70%;
+    gap: 25px;
+    flex-direction: column;
+    display: none;
+}
+
+#modalNavbar a {
+    color: white;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    font-size: 50px;
+    gap: 10px;
+    transition: all 0.5s;
+    width: fit-content;
+}
+
+#modalNavbar a > img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+#modalNavbar .actual_page,
+#modalNavbar a:hover {
+    font-weight: bold;
+    transform: scale(1.1);
+}
+
+/*
+----------------------------------------------------------------
+    Underline effect
+----------------------------------------------------------------
+*/
+#modalNavbar a::after {
+    background-color: white;
+    content: "";
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: width 0.7s;
+    width: 0;
+}
+
+#modalNavbar .actual_page::after,
+#modalNavbar a:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    #modalNavbar {
+        display: flex;
+    }
+}

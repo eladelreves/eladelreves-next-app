@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import styles from './mainLogo.module.css'
 
 export default function MainLogo() {
@@ -8,16 +8,16 @@ export default function MainLogo() {
     const arrowRef = useRef(null);
 
     const handleArrowClick = () => {
-        const introContainer = document.getElementById('introSection_intro_section__QPK58');
+        const introContainer = document.getElementById('introSection');
         introContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
-    useEffect(() => {
+    const handleScroll = () => {
         const logo = logoRef.current;
         const h2 = h2Ref.current;
         const arrow = arrowRef.current;
 
-        const handleScroll = () => {
+        if (logo) {
             const logoRect = logo.getBoundingClientRect();
             const containerHeight = document.getElementById('mainLogo_main_logo__D6RDO')?.clientHeight;
 
@@ -28,23 +28,16 @@ export default function MainLogo() {
             const rotation = (logoYPosition / containerHeight) * 250;
 
             // Aplicar la rotación al logo
-            logo.style.transform = `rotateX(${rotation}deg)`;
+            if (rotation !== 13.513513513513514) logo.style.transform = `rotateX(${rotation}deg)`;
 
             // Calcular la opacidad del h2 basada en la rotación del logo
             const opacity = 1 - (rotation / 360); // 360 grados es una vuelta completa
             h2.style.opacity = opacity < 0 ? 0 : opacity; // Asegurar que la opacidad no sea negativa
             arrow.style.opacity = opacity < 0 ? 0 : opacity;
+        }
+    };
 
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        handleScroll(); // Asegurar que los elementos visibles al cargar también se animen
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+    window.addEventListener('scroll', handleScroll);
 
     return (
         <>

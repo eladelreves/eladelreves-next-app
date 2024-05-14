@@ -22,13 +22,12 @@
     width: 850px;
 }
 
-#main_logo h2{
+#main_logo h2 {
     margin: auto;
     position: sticky;
     top: 700px;
     width: 100%;
 }
-
 
 
 /*
@@ -83,4 +82,22 @@
 #arrow:hover::before {
 	border-color: #68B54C;
 	transform: scale(.8);
+}
+
+
+
+@media (max-width: 480px) {
+    #main_logo img {
+    	width: 100%;
+    	top: 250px;
+	}
+
+	#main_logo h2 {
+		font-size: 15px;
+    	top: 450px;
+	}
+
+	#arrow {
+		top: 500px;
+	}
 }

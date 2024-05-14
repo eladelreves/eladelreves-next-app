@@ -15,7 +15,6 @@ export default function RootLayout({ children }) {
 
     useEffect(() => {
         animateOnScroll();
-        console.log('renew');
     }, [pathname]);
 
     return (

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styles from './hamburger.module.css';
+import ModalNavbar from '../modalNavbar/ModalNavbar';
 
 export function Hamburger() {
     const [isActive, setIsActive] = useState(false);
 
     const handleClick = () => {
         setIsActive(!isActive);
+        document.querySelector('body').style.overflow = isActive ? 'visible' : 'hidden';
     };
 
     return (
@@ -16,12 +18,7 @@ export function Hamburger() {
                 </span>
             </button>
             {isActive && (
-                <div className={styles.overlay} onClick={handleClick}></div>
-            )}
-            {isActive && (
-                <div className={styles.modal}>
-                    <p>Contenido del modal...</p>
-                </div>
+                <div className={styles.overlay} onClick={handleClick}><ModalNavbar></ModalNavbar></div>
             )}
         </>
     );

@@ -39,3 +39,7 @@
   opacity: 1;
   transform: translateY(0); /* Restablece la transformación inicial */
 }
+
+.ReactModal__Body--open div {
+  z-index: 2000;
+}

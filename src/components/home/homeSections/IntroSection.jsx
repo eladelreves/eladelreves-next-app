@@ -3,7 +3,8 @@ import styles from './homeSections.module.css'
 export default function IntroSection() {
     return (
         <>
-            <section className={styles.home_sections}>
+            <section id='introSection' className={styles.home_sections}>
+                <br />
                 <h2 className="animate-on-scroll">
                     ¡Cambiemos la historia juntos: <span className='elaGreen'>ELA</span> Del Revés!
                 </h2>
