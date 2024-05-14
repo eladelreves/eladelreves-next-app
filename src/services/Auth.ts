@@ -129,3 +129,16 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
         console.error('Error al actualizar el campo "photoURL":', error);
     }
 }
+
+export const uploadVideo = async (selectedFile, user) => {
+    const storage = getStorage();
+    //const videosRef = ref(storage, `videos/${user.uid}`); Esta linea guarda los videos en carpetas para diferenciar que usuario la sube
+    const videosRef = ref(storage, `videos/`);
+    const fileRef = ref(videosRef, selectedFile.name);
+    await uploadBytes(fileRef, selectedFile);
+
+    const downloadURL = await getDownloadURL(fileRef);
+
+    console.log('URL de video guardada en Firebase Storage:', downloadURL);
+    return downloadURL;
+}
