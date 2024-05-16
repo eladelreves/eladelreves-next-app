@@ -13,9 +13,6 @@ export default function Delreves() {
     const handleSubmit = (event) => {
         event.preventDefault();
         uploadVideo(selectedFile, user);
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
     };
 
     const handleFileChange = (event) => {
@@ -34,8 +31,6 @@ export default function Delreves() {
             }));
 
             setVideos(urls);
-            console.log('Videos imported successfully');
-            
         } catch (error) {
             console.error('Error al obtener los videos:', error);
         }

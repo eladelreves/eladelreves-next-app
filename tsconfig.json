@@ -37,7 +37,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/layout.jsx"
-  ],
+, "src/app/delreves/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

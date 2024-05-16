@@ -2,7 +2,9 @@ import firebaseConfig from "firebase.config";
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
+import { resolve } from "path";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 const app = initializeApp(firebaseConfig);
@@ -131,14 +133,44 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
 }
 
 export const uploadVideo = async (selectedFile, user) => {
-    const storage = getStorage();
-    const videosRef = ref(storage, `videos/${user.uid}`);
-    //const videosRef = ref(storage, `videos/`);
-    const fileRef = ref(videosRef, selectedFile.name);
-    await uploadBytes(fileRef, selectedFile);
+    try{
+        const storage = getStorage();
+        const videosRef = ref(storage, `videos/${user.uid}`);
+        //const videosRef = ref(storage, `videos/`);
+        const fileRef = ref(videosRef, selectedFile.name);
+        await uploadBytes(fileRef, selectedFile);
 
-    const downloadURL = await getDownloadURL(fileRef);
+        const downloadURL = await getDownloadURL(fileRef);
 
-    console.log('URL de video guardada en Firebase Storage:', downloadURL);
-    return downloadURL;
+        Swal.fire({
+            icon: 'success',
+            title: 'Video subido!',
+        }).then(() => {
+            window.location.href = '/perfil';
+        });
+
+        return downloadURL;
+    }catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: "Error",
+            text: "Error al subir el video.",
+        })
+    };
 }
+
+export const fetchVideosByUser = async (user) => {
+    try {
+        const storage = getStorage();
+        const videosRef = ref(storage, `videos/${user?.uid}`);
+        const videoList = await listAll(videosRef);
+        
+        const urls = await Promise.all(videoList.items.map(async (item) => {
+            const url = await getDownloadURL(item);
+            return url;
+        }));
+        return urls;
+    } catch (error) {
+        console.error('Error al obtener los videos:', error);
+    }
+};

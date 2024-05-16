@@ -4,18 +4,19 @@ import { useEffect, useState } from 'react';
 import styles from './perfil.module.css'
 
 import { useUser } from "src/contexts/userContext";
-import { uploadProfilePhoto } from '@services/Auth';
+import { uploadProfilePhoto, fetchVideosByUser } from '@services/Auth';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // Importa las funciones necesarias de Firebase Storage
 import Modal from 'react-modal';
 import { RotatingLines } from 'react-loader-spinner';
 
 export default function Perfil() {
+    const { user } = useUser();
     const [image, setImage] = useState('/icons/default.png');
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
-
     const [videos, setVideos] = useState([]);
+    
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -39,30 +40,20 @@ export default function Perfil() {
         }, 1500);
     };
 
-    const { user } = useUser();
 
-    const fetchVideosByUser = async () => {
-        try {
-            const storage = getStorage();
-            const videosRef = ref(storage, `videos/${user.uid}`);
-            const videoList = await listAll(videosRef);
-            console.log(user);
-            const urls = await Promise.all(videoList.items.map(async (item) => {
-                const url = await getDownloadURL(item);
-                return url;
-            }));
-
-            setVideos(urls);
-        } catch (error) {
-            console.error('Error al obtener los videos:', error);
-        }
-    };
-    
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setIsLoading(false);
-        fetchVideosByUser();
+        async function fetchVideos() {
+            try {
+                const videos = await fetchVideosByUser(user);
+                setVideos(videos);
+            } catch (error) {
+                console.error('Error al obtener los videos:', error);
+            }
+        }
+        fetchVideos();
     }, [user]);
 
     return (
@@ -123,7 +114,7 @@ export default function Perfil() {
                 <br /><br /><br /><br />
                     <div id={styles.user_videos}>
                         {videos.map((videoUrl, index) => (
-                            <video src={videoUrl} controls autoPlay loop>
+                            <video src={videoUrl} key={index} autoPlay muted loop>
                                 Tu navegador no admite el elemento de video.
                             </video>
                         ))}
@@ -133,6 +124,7 @@ export default function Perfil() {
             ) : (
                 <h2 className={styles.videos_title}>Sube tus <span className='elaGreen'>videos</span>!</h2>
             )}
+            <br /><br /><br /><br /><br /><br /><br /><br />
         </>
     );
 }

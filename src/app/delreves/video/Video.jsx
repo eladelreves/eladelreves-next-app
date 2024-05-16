@@ -9,7 +9,7 @@ Video.propTypes = {
 export function Video({ user, video }){
     return(
         <div className={styles.div_con_video}>
-            <span>{user}</span>
+            <span>@eladelrevés</span>
 
             <video autoPlay loop controls>
                 <source src={video} type="video/mp4"/>
