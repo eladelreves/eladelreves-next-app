@@ -5,6 +5,7 @@ import styles from './perfil.module.css'
 
 import { useUser } from "src/contexts/userContext";
 import { uploadProfilePhoto } from '@services/Auth';
+import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // Importa las funciones necesarias de Firebase Storage
 import Modal from 'react-modal';
 import { RotatingLines } from 'react-loader-spinner';
 
@@ -13,6 +14,8 @@ export default function Perfil() {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+
+    const [videos, setVideos] = useState([]);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -38,10 +41,28 @@ export default function Perfil() {
 
     const { user } = useUser();
 
+    const fetchVideosByUser = async () => {
+        try {
+            const storage = getStorage();
+            const videosRef = ref(storage, `videos/${user.uid}`);
+            const videoList = await listAll(videosRef);
+            console.log(user);
+            const urls = await Promise.all(videoList.items.map(async (item) => {
+                const url = await getDownloadURL(item);
+                return url;
+            }));
+
+            setVideos(urls);
+        } catch (error) {
+            console.error('Error al obtener los videos:', error);
+        }
+    };
+    
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setIsLoading(false);
+        fetchVideosByUser();
     }, [user]);
 
     return (
@@ -95,7 +116,23 @@ export default function Perfil() {
                 </Modal>
             </div>
 
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <br /><br /><br />
+            {videos.length > 0 ? (
+                <>
+                <h2 className={styles.videos_title}>Tus <span className='elaGreen'>videos!</span></h2>
+                <br /><br /><br /><br />
+                    <div id={styles.user_videos}>
+                        {videos.map((videoUrl, index) => (
+                            <video src={videoUrl} controls autoPlay loop>
+                                Tu navegador no admite el elemento de video.
+                            </video>
+                        ))}
+                        {isLoading && <div ref={loaderRef}></div>}
+                    </div>
+                </>
+            ) : (
+                <h2 className={styles.videos_title}>Sube tus <span className='elaGreen'>videos</span>!</h2>
+            )}
         </>
     );
 }

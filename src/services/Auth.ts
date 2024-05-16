@@ -132,8 +132,8 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
 
 export const uploadVideo = async (selectedFile, user) => {
     const storage = getStorage();
-    //const videosRef = ref(storage, `videos/${user.uid}`); Esta linea guarda los videos en carpetas para diferenciar que usuario la sube
-    const videosRef = ref(storage, `videos/`);
+    const videosRef = ref(storage, `videos/${user.uid}`);
+    //const videosRef = ref(storage, `videos/`);
     const fileRef = ref(videosRef, selectedFile.name);
     await uploadBytes(fileRef, selectedFile);
 

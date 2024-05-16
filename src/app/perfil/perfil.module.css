@@ -93,3 +93,22 @@
     top: 0;
     right: 0;
 }
+
+.videos_title{
+    font-size: 36px;
+    margin-top: 50px;
+    text-align: center;
+    color: black;
+}
+
+#user_videos{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: auto;
+    justify-content: space-around;
+}
+
+#user_videos > video{
+    width: 600px;
+}

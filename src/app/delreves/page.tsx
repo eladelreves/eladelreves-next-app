@@ -25,8 +25,8 @@ export default function Delreves() {
     const fetchVideos = async () => {
         try {
             const storage = getStorage();
-            const videosRef = ref(storage, 'videos'); // Referencia a la carpeta donde se almacenan los videos
-            const videoList = await listAll(videosRef); // Obtiene una lista de todos los archivos en la carpeta
+            const videosRef = ref(storage, 'videos');
+            const videoList = await listAll(videosRef);
 
             const urls = await Promise.all(videoList.items.map(async (item) => {
                 const url = await getDownloadURL(item);
