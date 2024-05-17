@@ -1,0 +1,19 @@
+.videoContainer {
+    position: relative;
+}
+
+.videoContainer video {
+    height: 600px;
+    border-radius: 10px;
+	box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.85);
+    object-fit: cover; 
+    width: 400px;
+}
+
+#three_dots{
+    position: absolute;
+    cursor: pointer;
+    top: 10px;
+    right: 0;
+    z-index: 10;
+}

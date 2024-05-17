@@ -7,6 +7,7 @@ import { useUser } from "src/contexts/userContext";
 import { uploadProfilePhoto, fetchVideosByUser } from '@services/Auth';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // Importa las funciones necesarias de Firebase Storage
 import Modal from 'react-modal';
+import VideoPlayer from './videoPlayer/VideoPlayer'
 import { RotatingLines } from 'react-loader-spinner';
 
 export default function Perfil() {
@@ -106,7 +107,6 @@ export default function Perfil() {
                     <img src='/icons/close.svg' onClick={() => setModalIsOpen(false)} />
                 </Modal>
             </div>
-
             <br /><br /><br />
             {videos.length > 0 ? (
                 <>
@@ -114,9 +114,7 @@ export default function Perfil() {
                 <br /><br /><br /><br />
                     <div id={styles.user_videos}>
                         {videos.map((videoUrl, index) => (
-                            <video src={videoUrl} key={index} autoPlay muted loop>
-                                Tu navegador no admite el elemento de video.
-                            </video>
+                            <VideoPlayer key={index} videoUrl={videoUrl}></VideoPlayer>
                         ))}
                         {isLoading && <div ref={loaderRef}></div>}
                     </div>
