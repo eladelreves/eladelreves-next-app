@@ -138,6 +138,16 @@ export const uploadVideo = async (selectedFile, user) => {
         const videosRef = ref(storage, `videos/${user.uid}`);
         //const videosRef = ref(storage, `videos/`);
         const fileRef = ref(videosRef, selectedFile.name);
+        
+        Swal.fire({
+            title: 'Subiendo video...',
+            text: 'Por favor, espera mientras se sube el video.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
         await uploadBytes(fileRef, selectedFile);
 
         const downloadURL = await getDownloadURL(fileRef);
