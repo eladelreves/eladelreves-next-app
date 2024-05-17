@@ -1,0 +1,24 @@
+#go_to_top_link a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#go_to_top_link a:hover {animation: bounce 0.9s;}
+
+#go_to_top_link img:first-child {width: 30px;}
+
+#go_to_top_link img:last-child {width: 150px;}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}

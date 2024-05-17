@@ -1,0 +1,18 @@
+#contact_data h4 {text-align: right;}
+
+#contact_data > div {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+#contact_data > div a {
+    color: white;
+    cursor: pointer;
+}
+#contact_data > div a:hover {text-decoration: underline;}
+
+#contact_data > div img {
+    margin-right: 10px;
+    width: 20px;
+}

@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation'
 import { Inter } from "next/font/google";
 import { Navbar } from '@components/_common/navbar/Navbar.jsx'
+import { Footer } from '@components/_common/footer/Footer.jsx'
 import "./globals.css";
 import { metadata } from './metadata';
 import { UserProvider } from 'src/contexts/userContext';
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
                 <UserProvider>
                     {pathname !== '/login' && pathname !== '/register' && <Navbar />}
                     {children}
+                    {pathname !== '/login' && pathname !== '/register' && <Footer />}
                 </UserProvider>
             </body>
         </html>
