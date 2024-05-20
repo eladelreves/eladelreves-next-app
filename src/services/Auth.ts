@@ -184,3 +184,10 @@ export const fetchVideosByUser = async (user) => {
         console.error('Error al obtener los videos:', error);
     }
 };
+
+export const deleteVideo = (index) => {
+    console.log(`Three dots clicked on video ${index}`);
+    // Lógica para eliminar el video
+    const updatedVideos = videos.filter((_, i) => i !== index);
+    setVideos(updatedVideos);
+};

@@ -9,7 +9,7 @@ export default function VideoPlayer({ index ,videoUrl, deleteVideo }){
             <img 
                 src="/icons/threedots.svg" 
                 id={styles.three_dots} 
-                onClick={()=> deleteVideo(index)}
+                onClick={()=> deleteVideo(index, videoUrl)}
             />
         </div>
     );
