@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styles from './perfil.module.css'
 
 import { useUser } from "src/contexts/userContext";
-import { uploadProfilePhoto, fetchVideosByUser } from '@services/Auth';
+import { uploadProfilePhoto, fetchVideosByUser, deleteVideo } from '@services/Auth';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // Importa las funciones necesarias de Firebase Storage
 import Modal from 'react-modal';
 import VideoPlayer from './videoPlayer/VideoPlayer'
@@ -56,13 +56,6 @@ export default function Perfil() {
         }
         fetchVideos();
     }, [user]);
-
-    const deleteVideo = (index) => {
-        console.log(`Three dots clicked on video ${index}`);
-        // Lógica para eliminar el video
-        const updatedVideos = videos.filter((_, i) => i !== index);
-        setVideos(updatedVideos);    
-    };
 
     return (
         <>
@@ -125,7 +118,7 @@ export default function Perfil() {
                                 key={index}
                                 index={index}
                                 videoUrl={videoUrl}
-                                deleteVideo={deleteVideo}
+                                deleteVideo={()=> deleteVideo(videoUrl)}
                             />
                         ))}
                         {isLoading && <div ref={loaderRef}></div>}
