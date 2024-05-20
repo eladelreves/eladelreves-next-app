@@ -57,6 +57,13 @@ export default function Perfil() {
         fetchVideos();
     }, [user]);
 
+    const deleteVideo = (index) => {
+        console.log(`Three dots clicked on video ${index}`);
+        // Lógica para eliminar el video
+        const updatedVideos = videos.filter((_, i) => i !== index);
+        setVideos(updatedVideos);    
+    };
+
     return (
         <>
             <div id={styles.profile_info}>
@@ -114,7 +121,12 @@ export default function Perfil() {
                 <br /><br /><br /><br />
                     <div id={styles.user_videos}>
                         {videos.map((videoUrl, index) => (
-                            <VideoPlayer key={index} videoUrl={videoUrl}></VideoPlayer>
+                            <VideoPlayer
+                                key={index}
+                                index={index}
+                                videoUrl={videoUrl}
+                                deleteVideo={deleteVideo}
+                            />
                         ))}
                         {isLoading && <div ref={loaderRef}></div>}
                     </div>
