@@ -19,7 +19,7 @@
     filter: drop-shadow(16px 7px 8px #939393);
     position: sticky;
     top: 200px;
-    width: 850px;
+    max-width: 850px;
 }
 
 #main_logo h2 {
@@ -85,19 +85,34 @@
 }
 
 
-
 @media (max-width: 480px) {
     #main_logo img {
     	width: 100%;
-    	top: 250px;
+    	top: 350px;
 	}
 
 	#main_logo h2 {
 		font-size: 15px;
-    	top: 450px;
+    	top: 575px;
 	}
 
 	#arrow {
-		top: 500px;
+		top: 610px;
+	}
+}
+
+@media (480px <= width <= 850px){
+    #main_logo img {
+    	width: 100%;
+    	top: 300px;
+	}
+
+	#main_logo h2 {
+		font-size: 15px;
+    	top: 625px;
+	}
+
+	#arrow {
+		top: 660px;
 	}
 }
