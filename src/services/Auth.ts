@@ -2,7 +2,7 @@ import firebaseConfig from "firebase.config";
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
-import { getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import { resolve } from "path";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -183,4 +183,39 @@ export const fetchVideosByUser = async (user) => {
     } catch (error) {
         console.error('Error al obtener los videos:', error);
     }
+}
+
+export const deleteVideo = async (videoUrl) => {
+    const storage = getStorage();
+    const videoRef = ref(storage, videoUrl);
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'No, cancelar'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                await deleteObject(videoRef);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Video eliminado con éxito',
+                }).then(() => {
+                    window.location.reload();
+                });
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al eliminar el video',
+                    text: error.message,
+                });
+                console.error('Error al eliminar el video:', error);
+            }
+        }
+    });
 };

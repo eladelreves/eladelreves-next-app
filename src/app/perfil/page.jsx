@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styles from './perfil.module.css'
 
 import { useUser } from "src/contexts/userContext";
-import { uploadProfilePhoto, fetchVideosByUser } from '@services/Auth';
+import { uploadProfilePhoto, fetchVideosByUser, deleteVideo } from '@services/Auth';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // Importa las funciones necesarias de Firebase Storage
 import Modal from 'react-modal';
 import VideoPlayer from './videoPlayer/VideoPlayer'
@@ -114,7 +114,12 @@ export default function Perfil() {
                 <br /><br /><br /><br />
                     <div id={styles.user_videos}>
                         {videos.map((videoUrl, index) => (
-                            <VideoPlayer key={index} videoUrl={videoUrl}></VideoPlayer>
+                            <VideoPlayer
+                                key={index}
+                                index={index}
+                                videoUrl={videoUrl}
+                                deleteVideo={()=> deleteVideo(videoUrl)}
+                            />
                         ))}
                         {isLoading && <div ref={loaderRef}></div>}
                     </div>
