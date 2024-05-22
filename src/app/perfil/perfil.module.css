@@ -105,6 +105,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 80%;
+    min-height: 500px;
     margin: auto;
     gap: 25px;
     justify-content: center;

@@ -23,6 +23,7 @@ const NewsSlider = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     Autoplay({ playOnInit: true, delay: 3000 })
   ])
+
   const tweenFactor = useRef(0)
   const tweenNodes = useRef([])
 
@@ -140,7 +141,7 @@ const NewsSlider = () => {
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}
-              onClick={() => onDotButtonClick(index)}
+              onClick={() => onButtonAutoplayClick(onDotButtonClick(index))}
               className={'embla__dot'.concat(
                 index === selectedIndex ? ' embla__dot--selected' : ''
               )}

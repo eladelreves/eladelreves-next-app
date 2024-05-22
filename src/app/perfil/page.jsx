@@ -9,6 +9,7 @@ import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // 
 import Modal from 'react-modal';
 import VideoPlayer from './videoPlayer/VideoPlayer'
 import { RotatingLines } from 'react-loader-spinner';
+import VideoForm from '@components/_common/videoForm/VideoForm';
 
 export default function Perfil() {
     const { user } = useUser();
@@ -17,7 +18,7 @@ export default function Perfil() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [videos, setVideos] = useState([]);
-    
+
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -110,24 +111,27 @@ export default function Perfil() {
             <br /><br /><br />
             {videos.length > 0 ? (
                 <>
-                <h2 className={styles.videos_title}>Tus <span className='elaGreen'>videos!</span></h2>
-                <br /><br /><br /><br />
+                    <h2 className={styles.videos_title}>Tus <span className='elaGreen'>videos!</span></h2>
+                    <br /><br /><br /><br />
                     <div id={styles.user_videos}>
                         {videos.map((videoUrl, index) => (
                             <VideoPlayer
                                 key={index}
                                 index={index}
                                 videoUrl={videoUrl}
-                                deleteVideo={()=> deleteVideo(videoUrl)}
+                                deleteVideo={() => deleteVideo(videoUrl)}
                             />
                         ))}
                         {isLoading && <div ref={loaderRef}></div>}
                     </div>
                 </>
             ) : (
-                <h2 className={styles.videos_title}>Sube tus <span className='elaGreen'>videos</span>!</h2>
+                <>
+                    <h2 className={styles.videos_title}>¡Sube tu <span className='elaGreen'>primer video</span>!</h2>
+                    <VideoForm></VideoForm>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                </>
             )}
-            <br /><br /><br /><br /><br /><br /><br /><br />
         </>
     );
 }

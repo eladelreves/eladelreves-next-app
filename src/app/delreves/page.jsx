@@ -5,20 +5,11 @@ import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // 
 import { uploadVideo } from '@services/Auth'
 import { useUser } from "src/contexts/userContext";
 import { Video } from './video/Video';
+import VideoForm from '@components/_common/videoForm/VideoForm'
 
 export default function Delreves() {
     const [videos, setVideos] = useState([]);
-    const [selectedFile, setSelectedFile] = useState(null);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        uploadVideo(selectedFile, user);
-    };
-
-    const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-    };
-    
     const fetchVideos = async () => {
         try {
             const storage = getStorage();
@@ -37,20 +28,14 @@ export default function Delreves() {
     };
 
     useEffect(() => {
-        fetchVideos(); 
-    }, []); 
+        fetchVideos();
+    }, []);
 
     const { user } = useUser();
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="file-upload" className="custom-file-upload">
-                    Seleccionar video
-                </label>
-                <input id="file-upload" type="file" accept="video/*" onChange={handleFileChange}/>
-                <input type="submit" value="Enviar" />
-            </form>
+            <VideoForm></VideoForm>
 
             <h2 id={styles.delreves_title}>Últimos <span className='elaGreen'>Videos</span></h2>
             <div id={styles.videos_container}>
