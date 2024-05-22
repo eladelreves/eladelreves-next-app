@@ -1,0 +1,70 @@
+#downloadApp {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    overflow: hidden;
+}
+
+#downloadApp > img {
+    width: 40%;
+    max-width: 600px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+#downloadApp > img:hover {
+    filter: drop-shadow(10px 5px 8px #939393);
+}
+
+#downloadApp > div {
+    width: 40%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    text-align: left;
+    gap: 25px;
+}
+
+#downloadApp > div img {
+	box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+    cursor: pointer;
+    width: 150px;
+    transition: all 0.5s;
+}
+
+#downloadApp > div img:hover {
+    transform: scale(1.05);
+}
+
+#downloadApp > div img:first-child {
+    margin-right: 25px;
+}
+
+@media (max-width: 834px) {
+    #downloadApp {
+        flex-direction: column;
+    }
+
+    #downloadApp > div, #downloadApp > img {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+
+    #downloadApp > div img {
+        width: 80px;
+    }
+}
+
+@media (834px < width <= 1024px){
+	#downloadApp h2 {
+		font-size: 20px;
+	}
+    
+    #downloadApp p {
+        font-size: 12px;
+    }
+
+    #downloadApp > div img {
+        width: 100px;
+    }
+}

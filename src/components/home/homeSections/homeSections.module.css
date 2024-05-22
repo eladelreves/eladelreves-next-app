@@ -10,11 +10,15 @@
     margin: auto;
     padding-bottom: 50px;
     margin-bottom: 50px;
-    text-align: center;
     width: 80%;
 }
 
-.home_sections > h2 {
+.home_sections:last-child {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.home_sections h2 {
     font-size: 25pt;
 }
 
@@ -32,4 +36,10 @@
     filter: drop-shadow(16px 7px 10px #939393);
     margin-bottom: 50px;
     width: 100%;
+}
+
+@media (max-width: 480px) {
+    .home_sections h2 {
+    font-size: 18pt;
+}
 }
