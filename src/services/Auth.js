@@ -105,7 +105,7 @@ export function getCurrentUser() {
             if (currentUser) {
                 resolve(currentUser); // Resuelve la promesa con el usuario actual
             } else {
-                reject(new Error('No hay usuario autenticado')); // Rechaza la promesa si no hay usuario autenticado
+                reject(console.error('No hay usuario autenticado')); // Rechaza la promesa si no hay usuario autenticado
             }
         });
     });

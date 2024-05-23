@@ -11,12 +11,8 @@ export function useUser() {
 export function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     async function fetchUser() {
-        try {
-            const currentUser = await getCurrentUser();
-            setUser(currentUser);
-        } catch (error) {
-            console.error('Error al obtener el usuario:', error);
-        }
+        const currentUser = await getCurrentUser();
+        setUser(currentUser);
     }
     fetchUser();
 
