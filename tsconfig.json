@@ -37,7 +37,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/services/Auth.js",
-    "src/app/register/page.jsx"
+    "src/app/register/page.jsx",
+    "src/contexts/userContext.js",
+    "src/contexts/userContext.jsx"
   ],
   "exclude": [
     "node_modules"
