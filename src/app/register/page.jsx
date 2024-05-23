@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import Password_Input from "@components/password_input/Password_Input";
+import PasswordInput from "@components/passwordInput/PasswordInput";
 import { registerUser } from '@services/Auth';
 
 export default function Register() {
@@ -71,10 +71,10 @@ export default function Register() {
                         />
 
                         <label htmlFor="registerPassword">Contraseña</label>
-                        <Password_Input handleChange={handleChange} name='registerPassword'></Password_Input>
+                        <PasswordInput handleChange={handleChange} name='registerPassword'></PasswordInput>
 
                         <label htmlFor="registerPasswordConfirmation">Repetir Contraseña</label>
-                        <Password_Input handleChange={handleChange} name='registerPasswordConfirmation'></Password_Input>
+                        <PasswordInput handleChange={handleChange} name='registerPasswordConfirmation'></PasswordInput>
 
                         <button type='submit'>Enviar</button>
                     </form>

@@ -1,8 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import styles from './delreves.module.css';
-import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // Importa las funciones necesarias de Firebase Storage
-import { uploadVideo } from '@services/Auth'
+import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 import { useUser } from "src/contexts/userContext";
 import { Video } from './video/Video';
 import VideoForm from '@components/_common/videoForm/VideoForm'

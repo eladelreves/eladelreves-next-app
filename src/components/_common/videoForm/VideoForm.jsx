@@ -1,9 +1,11 @@
 import styles from './videoForm.module.css';
 import { useState } from 'react';
 import { uploadVideo } from '@services/Auth'
+import { useUser } from 'src/contexts/userContext';
 
 export default function VideoForm() {
     const [selectedFile, setSelectedFile] = useState(null);
+    const { user } = useUser();
 
     const handleSubmit = (event) => {
         event.preventDefault();

@@ -1,5 +1,5 @@
 import styles from './homeSections.module.css'
-import DownloadApp from './DownloadApp/DownloadApp'
+import DownloadApp from './downloadApp/DownloadApp'
 
 export default function DelrevesSection() {
     return (

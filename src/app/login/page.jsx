@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import Password_input from '@components/password_input/Password_Input';
+import PasswordInput from '@components/passwordInput/PasswordInput';
 import { login } from '@services/Auth';
 
 export default function Login() {
@@ -47,7 +47,7 @@ export default function Login() {
                         />
 
                         <label htmlFor="loginPassword">Contraseña</label>
-                        <Password_input handleChange={handleChange} name='loginPassword' />
+                        <PasswordInput handleChange={handleChange} name='loginPassword' />
 
                         <Link href=''>¿Has olvidado la contraseña?</Link>
 

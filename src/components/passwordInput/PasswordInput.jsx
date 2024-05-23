@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import styles from './password_input.module.css'
+import styles from './passwordInput.module.css'
 
-export default function Password_input({ handleChange, name }) {
+export default function PasswordInput({ handleChange, name }) {
     const [isVisible, setIsVisible] = useState(true);
 
     const toggleVisibility = () => {
