@@ -7,7 +7,7 @@ export default function LaElaSection() {
             <section className={styles.home_sections}>
                 <h2 className="animate-on-scroll">La <span className='elaGreen'>ELA</span></h2>
 
-                <span className="animate-on-scroll">"una realidad ignorada"</span>
+                <span className="animate-on-scroll">&quotuna realidad ignorada&quot</span>
 
                 <img className="animate-on-scroll" src={'media/png/elaDay.png'} alt="Imagen de concienciacion de la enfermedad de la ELA en España" />
 
