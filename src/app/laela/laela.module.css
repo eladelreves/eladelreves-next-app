@@ -1,0 +1,81 @@
+/*
+    ----------------------------------------------------------------
+        Intro Section
+    ----------------------------------------------------------------
+*/
+#intro_container, #ela_symptoms, #video_container, #ela_origin, #ela_investigation, #ela_treatment, #ela_therapy{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    margin: auto;
+    text-align: center;
+    width: 85%;
+}
+
+#intro_container h1{
+    font-size: 30pt;
+    margin-top:50px;
+    margin-bottom: 25px;
+}
+
+#intro_container, #ela_symptoms, #ela_origin, #ela_therapy, #ela_treatment{border-bottom: .5px solid rgb(198, 198, 198);}
+
+#intro_container > p, #ela_symptoms p, #ela_origin p , #ela_investigation p, #ela_treatment p,  #ela_therapy p{
+    width: 100%;
+    font-size: 16pt;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+/*
+    ----------------------------------------------------------------
+        La Ela Symptoms
+    ----------------------------------------------------------------
+*/
+#ela_symptoms h2, #ela_origin h2, #ela_treatment h2, #ela_therapy h2{
+    font-size: 22pt;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+#video_container{
+    margin-top: 25px;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+#video_container iframe{
+    width: 47%;
+    height: 400px;
+    border-radius: 5px;
+	box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+}
+
+#video_container p{
+    width: 49%;
+}
+
+/*
+    ----------------------------------------------------------------
+        La Ela List
+    ----------------------------------------------------------------
+*/
+.ela_list{
+    list-style: circle;
+    width: 100%;
+}
+
+.ela_list > li{
+    margin-left: 70px;
+}
+
+/*
+    ----------------------------------------------------------------
+        La Ela Treatment
+    ----------------------------------------------------------------
+*/
