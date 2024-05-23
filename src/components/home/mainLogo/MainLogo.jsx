@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './mainLogo.module.css'
 
 export default function MainLogo() {
@@ -37,7 +37,9 @@ export default function MainLogo() {
         }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+    }, [])
 
     return (
         <>
