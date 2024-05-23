@@ -10,10 +10,17 @@
     width: 400px;
 }
 
-#three_dots{
+#bin{
     position: absolute;
     cursor: pointer;
-    top: 10px;
-    right: 0;
+    top: 15px;
+    right: 10px;
     z-index: 10;
+    padding: 5px;
+    transition: .5s;
+    border-radius: 50px;
+}
+
+#bin:hover{
+    background-color: white;
 }

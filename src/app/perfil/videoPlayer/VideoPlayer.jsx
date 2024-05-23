@@ -7,8 +7,8 @@ export default function VideoPlayer({ index ,videoUrl, deleteVideo }){
                 Tu navegador no admite el elemento de video.
             </video>
             <img 
-                src="/icons/threedots.svg" 
-                id={styles.three_dots} 
+                src="/icons/bin.svg" 
+                id={styles.bin} 
                 onClick={()=> deleteVideo(index, videoUrl)}
             />
         </div>
