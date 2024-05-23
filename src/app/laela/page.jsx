@@ -8,8 +8,8 @@ export default function Laela() {
     return (
       <>
         <ElaIntroSection></ElaIntroSection>
-        <OriginSection></OriginSection>
         <Symptoms></Symptoms>
+        <OriginSection></OriginSection>
         <TherapySection></TherapySection>
         <TreatmentSection></TreatmentSection>
       </>
