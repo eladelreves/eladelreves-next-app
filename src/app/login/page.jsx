@@ -7,7 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import PasswordInput from '@components/passwordInput/PasswordInput';
-import { login } from '@services/Auth';
+import { login, resetPassword } from '@services/Auth';
+import Swal from 'sweetalert2';
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -49,7 +50,20 @@ export default function Login() {
                         <label htmlFor="loginPassword">Contraseña</label>
                         <PasswordInput handleChange={handleChange} name='loginPassword' />
 
-                        <Link href=''>¿Has olvidado la contraseña?</Link>
+                        <Link href='' onClick={async () => {
+                            const { value: email } = await Swal.fire({
+                                title: "Correo de recuperación",
+                                input: "email",
+                                inputPlaceholder: "Enter your email address"
+                            });
+                            if (email) {
+                                resetPassword(email)
+                                Swal.fire(`Correo enviado a: ${email}`);
+                            }
+                        }}
+                        >
+                            ¿Has olvidado la contraseña?
+                        </Link>
 
                         <button type='submit'>Enviar</button>
                     </form>

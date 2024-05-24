@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 .elaGreen { color: var(--elaGreen); }
 
 .underline { text-decoration: underline; }
@@ -42,4 +44,17 @@
 
 .ReactModal__Body--open div {
   z-index: 2000;
+}
+
+.swal2-popup {
+  font-family: 'Inter';
+}
+
+.swal2-popup .swal2-confirm {
+  background-color: var(--elaGreen);
+}
+
+.swal2-popup .swal2-confirm:active, .swal2-popup .swal2-confirm:focus {
+  box-shadow: none;
+  border: 0;
 }

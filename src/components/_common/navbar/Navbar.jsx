@@ -14,10 +14,12 @@ export function Navbar() {
     const { visible, showShadow } = useNavbarScroll();
     const [isLoading, setIsLoading] = useState(true);
 
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 300);
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 300);
 
+    }, [])
     const pages = [
         { name: 'Home', href: '/', icon: 'home.svg' },
         { name: 'La ELA', href: '/laela', icon: 'laela.svg' },

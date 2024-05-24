@@ -1,10 +1,8 @@
 import firebaseConfig from "firebase.config";
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import { resolve } from "path";
-import { useState } from "react";
 import Swal from "sweetalert2";
 
 const app = initializeApp(firebaseConfig);
@@ -65,6 +63,16 @@ export const registerUser = async (formData) => {
         });
 };
 
+export const resetPassword = (email) => {
+    sendPasswordResetEmail(auth, email)
+    .then(() => {
+
+    })
+    .catch((error) => {
+
+    });
+}
+
 export const login = async (formData) => {
     signInWithEmailAndPassword(auth, formData.loginEmail, formData.loginPassword)
         .then(() => {
@@ -105,7 +113,7 @@ export function getCurrentUser() {
             if (currentUser) {
                 resolve(currentUser); // Resuelve la promesa con el usuario actual
             } else {
-                reject(console.error('No hay usuario autenticado')); // Rechaza la promesa si no hay usuario autenticado
+                reject('Failed to get current user'); // Rechaza la promesa si no hay usuario autenticado
             }
         });
     });

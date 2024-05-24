@@ -1,6 +1,6 @@
 // userContext.js
 import { getCurrentUser, logout } from '@services/Auth';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const UserContext = createContext(null);
 
@@ -10,11 +10,20 @@ export function useUser() {
 
 export function UserProvider({ children }) {
     const [user, setUser] = useState(null);
-    async function fetchUser() {
-        const currentUser = await getCurrentUser();
-        setUser(currentUser);
-    }
-    fetchUser();
+
+    useEffect(() => {
+        async function fetchUser() {
+            try {
+                const currentUser = await getCurrentUser();
+                setUser(currentUser);
+            } catch (error) {
+                console.error(error);
+                setUser(null);
+            }
+        }
+
+        fetchUser();
+    }, []);
 
     const handleLogout = () => {
         logout()
