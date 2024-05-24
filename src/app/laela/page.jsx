@@ -9,9 +9,9 @@ export default function Laela() {
       <>
         <ElaIntroSection></ElaIntroSection>
         <Symptoms></Symptoms>
+        <TreatmentSection></TreatmentSection>
         <OriginSection></OriginSection>
         <TherapySection></TherapySection>
-        <TreatmentSection></TreatmentSection>
       </>
     );
   }

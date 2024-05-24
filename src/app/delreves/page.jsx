@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import styles from './delreves.module.css';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
-import { useUser } from "src/contexts/userContext";
 import { Video } from './video/Video';
 import VideoForm from '@components/_common/videoForm/VideoForm'
 
@@ -30,7 +29,6 @@ export default function Delreves() {
         fetchVideos();
     }, []);
 
-    const { user } = useUser();
 
     return (
         <>
@@ -39,7 +37,7 @@ export default function Delreves() {
             <h2 id={styles.delreves_title}>Últimos <span className='elaGreen'>Videos</span></h2>
             <div id={styles.videos_container}>
                 {videos.map((videoUrl, index) => (
-                    <Video user={user.email} key={index} video={videoUrl} controls>
+                    <Video key={index} video={videoUrl} controls>
                     </Video>
                 ))}
             </div>
