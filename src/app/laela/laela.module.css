@@ -34,7 +34,7 @@
         La Ela Symptoms
     ----------------------------------------------------------------
 */
-#ela_symptoms h2, #ela_origin h2, #ela_treatment h2, #ela_therapy h2{
+#ela_symptoms h2, #ela_origin h2, #ela_treatment h2, #ela_therapy > h2{
     font-size: 22pt;
     margin-top: 50px;
     margin-bottom: 25px;
@@ -58,6 +58,24 @@
 
 #video_container p{
     width: 49%;
+}
+
+@media (max-width: 480px) {
+    #video_container {
+        flex-direction: column;
+	}
+    #video_container iframe{
+        width:80%;
+    }
+}
+
+@media (480px <= width <= 850px){
+    #video_container {
+        flex-direction: column;
+	}
+    #video_container iframe{
+        width:80%;
+    }
 }
 
 /*
@@ -122,4 +140,64 @@
 .cards p {
     width: 80%;
     font-size: 18px;
+}
+
+/*
+    ----------------------------------------------------------------
+        La Ela Treatment
+    ----------------------------------------------------------------
+*/
+
+#medication_container{
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.medication{
+    width: 350px;
+    height: 600px;
+    margin: 5%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    transition: .5s;
+}
+
+.medication h3{
+    font-size: 25px;
+    margin-top: 50px;
+}
+
+.medication div img{
+    width: 250px;
+    filter: drop-shadow(16px 7px 8px #939393);
+}
+
+.arrow {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+.accordionContent {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.7s ease;
+    width: 100%;
+    font-size: 18px;
+}
+
+.accordionContent.open {
+    height: 200px;
+    opacity: 1;
 }

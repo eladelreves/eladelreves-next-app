@@ -1,12 +1,6 @@
 import styles from './video.module.css'
-import PropTypes from 'prop-types';
 
-Video.propTypes = {
-    user: PropTypes.string,
-    video: PropTypes.string
-};
-
-export function Video({ user, video }){
+export function Video({ video }){
     return(
         <div className={styles.div_con_video}>
             <span>@eladelrevés</span>
