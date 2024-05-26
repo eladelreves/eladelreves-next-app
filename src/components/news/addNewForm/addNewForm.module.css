@@ -1,0 +1,42 @@
+#add_new_button {
+    background-color: var(--elaGreen);
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    color: white;
+    cursor: pointer;
+    font-family: 'Inter';
+    font-size: 15px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    margin: auto;
+    transition: all 0.7s;
+    width: 150px;
+}
+
+#add_new_button:hover {
+    background-color: rgb(121, 195, 121);
+}
+
+#add_new_form {
+    width: 450px;
+    height: 700px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#add_new_form form {
+
+}
+
+#add_new_form > img {
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

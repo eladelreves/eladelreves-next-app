@@ -1,0 +1,24 @@
+#grid_container, #grid_container_skeleton {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    width: 80%;
+    min-height: 800px;
+    margin: 150px auto;
+}
+
+.large {
+    grid-column: span 3;
+}
+
+.medium {
+    grid-column: span 2;
+}
+
+.small {
+    grid-column: span 1;
+}
+
+#grid_container_skeleton > div {
+    width: 250px;
+}

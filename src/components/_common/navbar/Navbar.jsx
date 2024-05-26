@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -23,7 +25,7 @@ export function Navbar() {
     const pages = [
         { name: 'Home', href: '/', icon: 'home.svg' },
         { name: 'La ELA', href: '/laela', icon: 'laela.svg' },
-        { name: 'Noticias', href: '/blog', icon: 'blog.svg' },
+        { name: 'Noticias', href: '/noticias', icon: 'blog.svg' },
         { name: 'Únete', href: '/unete', icon: 'unete.svg' },
         { name: 'Del Revés', href: '/delreves', icon: 'delreves.svg' },
         isLoading

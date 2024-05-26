@@ -1,4 +1,5 @@
 'use client'
+
 import { usePathname } from 'next/navigation'
 import { Inter } from "next/font/google";
 import { Navbar } from '@components/_common/navbar/Navbar.jsx'

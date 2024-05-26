@@ -1,4 +1,4 @@
-// userContext.js
+'use client'
 import { getCurrentUser, logout } from '@services/Auth';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 

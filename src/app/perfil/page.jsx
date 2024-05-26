@@ -86,28 +86,26 @@ export default function Perfil() {
                 }
             </div>
 
-            <div>
-                <Modal id={styles.edit_modal} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor={styles.file_upload} id={styles.custom_file_upload}>
-                            Seleccionar foto
-                        </label>
+            <Modal id={styles.edit_modal} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor={styles.file_upload} id={styles.custom_file_upload}>
+                        Seleccionar foto
+                    </label>
 
-                        <input id={styles.file_upload} type="file" accept="image/*" onChange={handleFileChange} /><br />
+                    <input id={styles.file_upload} type="file" accept="image/*" onChange={handleFileChange} /><br />
 
-                        {image && (
-                            <img
-                                src={image}
-                                alt="Preview"
-                                style={{ maxWidth: '200px', maxHeight: '200px' }}
-                            />
-                        )}<br />
+                    {image && (
+                        <img
+                            src={image}
+                            alt="Preview"
+                            style={{ maxWidth: '200px', maxHeight: '200px' }}
+                        />
+                    )}<br />
 
-                        <input type="submit" value="Guardar cambios" className={styles.custom_file_upload} />
-                    </form>
-                    <img src='/icons/close.svg' onClick={() => setModalIsOpen(false)} />
-                </Modal>
-            </div>
+                    <input type="submit" value="Guardar cambios" className={styles.custom_file_upload} />
+                </form>
+                <img src='/icons/close.svg' onClick={() => setModalIsOpen(false)} />
+            </Modal>
             <br /><br /><br />
             {videos.length > 0 ? (
                 <>
