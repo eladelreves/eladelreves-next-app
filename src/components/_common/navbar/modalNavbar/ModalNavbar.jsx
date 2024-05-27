@@ -9,7 +9,7 @@ export default function ModalNavbar() {
     const pages = [
         { name: 'Home', href: '/', icon: 'home.svg' },
         { name: 'La ELA', href: '/laela', icon: 'laela.svg' },
-        { name: 'Noticias', href: '/blog', icon: 'blog.svg' },
+        { name: 'Noticias', href: '/noticias', icon: 'blog.svg' },
         { name: 'Únete', href: '/unete', icon: 'unete.svg' },
         { name: 'Del Revés', href: '/delreves', icon: 'delreves.svg' },
         user
