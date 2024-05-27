@@ -6,9 +6,9 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { insertNew } from '@services/News'
+import ReactQuill from 'react-quill'
 
 export default function AddNewForm() {
-    const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const [title, setTitle] = useState('');
@@ -20,29 +20,47 @@ export default function AddNewForm() {
         insertNew(title, content, images);
     };
 
+    const modules = {
+        toolbar: [
+            ['bold', 'italic'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link']
+        ],
+    }
+
+    const customStyles = {
+        content: {
+            overflow: 'hidden',
+        },
+    };
+
     return (
         <>
-            <button id={styles.add_new_button} onClick={() => { setModalIsOpen(true); document.querySelector('body').style.overflow = modalIsOpen ? 'visible' : 'hidden' }} src="/icons/edit.svg" alt="">
-                Añadir Noticia
-            </button>
+            <div id={styles.add_new_button_container}>
+                <button id={styles.add_new_button} onClick={() => { setModalIsOpen(true); document.querySelector('body').style.overflow = modalIsOpen ? 'visible' : 'hidden' }} src="/icons/edit.svg" alt="">
+                    Añadir Noticia
+                </button>
+            </div>
 
-            <Modal ariaHideApp={false} id={styles.add_new_form} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+            <Modal ariaHideApp={false} id={styles.add_new_form} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={{ content: { overflow: 'hidden' } }}>
                 <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder='Título...'
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
                     <div>
-                        <label htmlFor="title">Título:</label>
-                        <input
-                            type="text"
-                            id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                        <ReactQuill
+                            placeholder='Contenido...'
+                            value={content}
+                            onChange={setContent}
+                            modules={modules}
                         />
                     </div>
                     <div>
-                        <label htmlFor="content">Contenido:</label>
-                        <ReactQuill value={content} onChange={setContent} />
-                    </div>
-                    <div>
-                        <label htmlFor="images">Imágenes:</label>
+                        <label htmlFor="images">Imágenes: </label>
                         <input
                             type="file"
                             id="images"
@@ -50,7 +68,7 @@ export default function AddNewForm() {
                             onChange={(e) => setImages(Array.from(e.target.files))}
                         />
                     </div>
-                    <button type="submit">Agregar Noticia</button>
+                    <button id={styles.add_new_button} styles={{ position: 'static' }} type="submit">Agregar Noticia</button>
                 </form>
 
                 <img src='/icons/close.svg' onClick={() => {

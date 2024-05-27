@@ -5,7 +5,6 @@ import styles from './perfil.module.css'
 
 import { useUser } from "src/contexts/userContext";
 import { uploadProfilePhoto, fetchVideosByUser, deleteVideo } from '@services/Auth';
-import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage'; // Importa las funciones necesarias de Firebase Storage
 import Modal from 'react-modal';
 import VideoPlayer from './videoPlayer/VideoPlayer'
 import { RotatingLines } from 'react-loader-spinner';

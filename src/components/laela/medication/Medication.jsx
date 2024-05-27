@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import styles from 'src/app/laela/laela.module.css';
+import styles from '../laelaSections.module.css'
 
-export default function Medication ({ title, imgSrc, description }){
+export default function Medication({ title, imgSrc, description }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleAccordion = () => {
@@ -15,9 +15,9 @@ export default function Medication ({ title, imgSrc, description }){
             <div style={{ height: '250px', alignItems: 'center', display: 'flex' }}>
                 <img src={imgSrc} alt={title} />
             </div>
-            <img 
-                src="/icons/arrow_downward.svg" 
-                alt="Arrow Down" 
+            <img
+                src="/icons/arrow_downward.svg"
+                alt="Arrow Down"
                 className={`${styles.arrow} ${isOpen ? styles.rotate : ''}`}
                 onClick={toggleAccordion}
             />

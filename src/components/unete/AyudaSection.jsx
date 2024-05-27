@@ -1,32 +1,34 @@
 'use client'
+import Link from 'next/link';
 import { useState } from 'react';
 import styles from 'src/app/unete/unete.module.css'
 
-export function Ayuda(){
+export function Ayuda() {
     const [hovered, setHovered] = useState(false);
     const [hovered2, setHovered2] = useState(false);
-    return(
+
+    return (
         <>
-        <div className={styles.div}>
-            <h2 className={styles.h2}>Ayúdanos</h2>
-            <p className={styles.p}>
-                Tu ayuda es vital, y tienes dos formas muy sencillas de hacerlo. La primera es registrándote con nosotros, tanto desde esta web como desde la app que puedes descargar en esta misma página, donde podrás subir tus videos realizando el reto de "<span className='elaGreen'>ELA</span> del revés"
-            </p>
+            <div id={styles.help_us} className={styles.div}>
+                <h2 className={styles.h2}>Conóc<span className='elaGreen'>ela</span>, difúnd<span className='elaGreen'>ela</span>, ayúdanos</h2>
+                <p className={styles.p}>
+                    Considera hacer una <b>donación económica</b> a organizaciones dedicadas a la investigación de la <span className='elaGreen'>ELA</span>. Estas instituciones <b>necesitan fondos para financiar estudios</b> científicos que buscan encontrar una cura y <b>desarrollar tratamientos más efectivo</b>s. Incluso las donaciones pequeñas pueden sumar y tener un gran impacto. Puedes establecer donaciones recurrentes para proporcionar un <b>apoyo continuo o participar en campañas específicas</b> de recaudación de fondos.
+                </p>
 
-            <div id={styles.donate_buttons_container}>
-                <div className={styles.donateButtons} style={{backgroundImage: `url('/media/png/fundela.jpg')`}} onMouseEnter={() => setHovered(true)}onMouseLeave={() => setHovered(false)}>
-                    <span style={{opacity: hovered ? 1 : 0,}}>Donar</span>
+                <div id={styles.donate_buttons_container}>
+                    <Link href='https://www.fundela.es/colabora/donar/' className={styles.donateButtons} style={{ backgroundImage: `url('/media/png/fundela.jpg')` }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+                        <span style={{ opacity: hovered ? 1 : 0, }}>Donar</span>
+                    </Link>
+
+                    <Link href='https://adelaweb.org/tienda/colabora/' className={styles.donateButtons} style={{ backgroundImage: `url('/media/png/adEla.jpg')` }} onMouseEnter={() => setHovered2(true)} onMouseLeave={() => setHovered2(false)}>
+                        <span style={{ opacity: hovered2 ? 1 : 0, }}>Donar</span>
+                    </Link>
                 </div>
 
-                <div className={styles.donateButtons} style={{backgroundImage: `url('/media/png/adEla.jpg')`}} onMouseEnter={() => setHovered2(true)}onMouseLeave={() => setHovered2(false)}>
-                    <span style={{opacity: hovered2 ? 1 : 0,}}>Donar</span>
-                </div>
+                <p className={styles.p}>
+                    Otra forma valiosa de colaborar es <b>ofreciendo tu tiempo como voluntario</b>. Muchas organizaciones que apoyan a personas con <span className='elaGreen'>ELA</span> requieren voluntarios para ayudar en diversas actividades,<b> desde la organización de eventos hasta la asistencia directa a pacientes</b>. Ser voluntario no solo brinda ayuda práctica, sino que también ofrece un <b>apoyo emocional inestimable</b> a las personas afectadas y sus familias.
+                </p>
             </div>
-
-            <p className={styles.p}>
-                La segunda forma es donando una pequeña cantidad a alguna de las dos asociaciones contra el ELA con las que colaboramos, y que se encargan de que tu ayuda llegue a las personas que más lo necesitan para llevar un poco mejor las dificultades de su día a día.
-            </p>
-        </div>
         </>
     )
 }

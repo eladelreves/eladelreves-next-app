@@ -12,7 +12,7 @@ export function Footer() {
                 <ContactData></ContactData>
             </div>
 
-            <span id={styles.copyright}>Copyright 2024 © Todos los derechos reservados</span>
+            <span id={styles.copyright}>Copyright 2024 © eladelreves</span>
         </footer>
     )
 }

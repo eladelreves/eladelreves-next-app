@@ -31,6 +31,10 @@
   text-decoration: none;
 }
 
+h2 {
+  font-size: 25pt;
+}
+
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(20px); /* O cualquier otra transformación que desees */
@@ -57,4 +61,9 @@
 .swal2-popup .swal2-confirm:active, .swal2-popup .swal2-confirm:focus {
   box-shadow: none;
   border: 0;
+}
+
+.ql-editor {
+  height: 250px;
+  max-height: 250px;
 }

@@ -7,10 +7,14 @@ export default async function GridContainer() {
     let newsData = await getAllNews();
 
     return (
-        <>
-            <div id={styles.grid_container}>
-                <NewCard2 gridClassName={styles.large} data={newsData[0]} />
-            </div>
-        </>
-    )
+        <div id={styles.grid_container}>
+            {newsData.map((newsItem, index) => (
+                <NewCard2
+                    key={index}
+                    gridClassName={index === 0 ? styles.large : styles.small}
+                    data={newsItem}
+                />
+            ))}
+        </div>
+    );
 }

@@ -1,9 +1,9 @@
-import styles from 'src/app/laela/laela.module.css'
+import styles from './laelaSections.module.css'
 
-export default function Origin(){
-    return(
+export default function Origin() {
+    return (
         <>
-            <div id={styles.ela_origin}>
+            <div className={styles.laela_sections}>
                 <h2 className="animate_on_scroll">¿Cuándo se presenta la <span className='elaGreen'>ELA</span>?</h2>
                 <p className="animate_on_scroll">
                     La <span className='elaGreen'>ELA</span> suele aparecer entre las edades de <b>40 y 70 años</b>, pero puede darse también en edades más jóvenes o mayores. Suele darse con algo <b>más defrecuencia</b> en los <b>hombres que las mujeres</b>.
