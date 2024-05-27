@@ -3,7 +3,7 @@ export default function ElaIntroSection(){
     return(
         <>
         <div id={styles.intro_container}>
-            <h1>La Enfermedad del <span className='elaGreen'>ELA</span></h1>
+            <h1>La Enfermedad de la <span className='elaGreen'>ELA</span></h1>
             <p>
                 La esclerosis lateral amiotrófica (<span className='elaGreen'>ELA</span>) es una enfermedad degenerativa que afecta a las células nerviosas encargadas del control muscular. A medida que estas células se van dañando y muriendo, los músculos del cuerpo se debilitan y atrofian, lo que puede llevar a problemas de movilidad, habla, respiración y alimentación.
             </p>

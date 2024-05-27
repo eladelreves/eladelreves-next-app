@@ -46,7 +46,8 @@
     flex-direction: row;
     justify-content: space-between;
     text-align: justify;
-    margin-bottom: 25px;
+    gap: 50px;
+    margin-bottom: 20px;
 }
 
 #video_container iframe{

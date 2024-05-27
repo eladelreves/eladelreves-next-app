@@ -1,0 +1,85 @@
+@keyframes rotate {
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.div{
+    border-bottom: .5px solid rgb(198, 198, 198);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    width: 85%;
+}
+
+.turn_around{
+    display: inline-block;
+    animation: rotate 2s linear forwards; /* Duración de la animación */
+}
+
+.p{
+    font-size: 18pt;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.h2{
+    text-align: center;
+    font-size: 25pt;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+#join_intro_container > p {
+    font-size: 18pt;
+    text-align: center;
+}
+
+#donate_buttons_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.donateButtons {
+    border: 1px solid;
+    border-radius: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+	box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    height: 200px;
+    position: relative;
+    text-align: center;
+    transition: all 0.7s;
+    width: 400px;
+}
+
+.donateButtons span {
+    opacity: 0;
+    margin-bottom: 100px;
+    font-size: 35px;
+    color: white;
+    filter: drop-shadow(5px 5px 5px #000000);
+    transition: all 0.7s;
+}
+
+.donateButtons:hover {
+    transform: scale(1.1);
+}
+
+.donateButtons:hover .donateButtons span {
+    opacity: 1;
+}
+
