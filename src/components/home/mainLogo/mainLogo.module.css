@@ -1,5 +1,9 @@
 #main_logo {
-    display: flex;
+    
+}
+
+.main_logo_light{
+	display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -16,7 +20,7 @@
 }
 
 #main_logo img {
-    filter: drop-shadow(16px 7px 8px #939393);
+    filter: var(--dropshadow);
     position: sticky;
     top: 200px;
     max-width: 850px;
@@ -52,7 +56,7 @@
 	height: 100%;
 	border-width: .5vmin .5vmin 0 0;
 	border-style: solid;
-	border-color: black;
+	border-color:  var(--custom-arrow-color);
 	transition: .3s ease;
 	display: block;
 	transform-origin: 100% 0;
@@ -68,7 +72,7 @@
 	height: 101%;
 	border-width: 0 .5vmin 0 0;
 	border-style: solid;
-	border-color: black;
+	border-color:  var(--custom-arrow-color);
 	transform-origin: 100% 0;
 	transition:.3s ease;
 }

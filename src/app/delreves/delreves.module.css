@@ -15,7 +15,7 @@
     font-size: 50px;
     margin-top: 50px;
     text-align: center;
-    color: black;
+    color: var(--color);
 }
 
 @media (max-width: 530px) {

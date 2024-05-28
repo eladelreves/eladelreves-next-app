@@ -33,7 +33,7 @@
 }
 
 .home_sections > img {
-    filter: drop-shadow(16px 7px 10px #939393);
+    filter: var(--dropshadow);
     margin-bottom: 50px;
     width: 100%;
 }
