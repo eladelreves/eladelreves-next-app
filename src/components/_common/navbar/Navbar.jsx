@@ -9,8 +9,16 @@ import { Hamburger } from './hamburguer/Hamburger';
 import styles from './navbar.module.css';
 import { ThreeDots } from 'react-loader-spinner';
 import { Tooltip } from 'react-tooltip'
+import { useDarkMode } from 'src/contexts/darkModeContext'; 
 
 export function Navbar() {
+    const { darkMode, toggleDarkMode } = useDarkMode(); 
+    const headerId = darkMode ? '' : `${styles.header_container}`;
+    const headerClass = darkMode ?  `${styles.dark}` : '';
+    const srcImage = darkMode ?  '/media/png/logo_horizontal_dark_mode.png' : '/media/png/logo_horizontal.png';
+    const boxShadow = darkMode ? '0px 4px 8px 0px rgba(255, 255, 255, 0.2)' : '0px 4px 8px 0px rgba(0, 0, 0, 0.2)';
+
+
     const { user, handleLogout } = useUser();
     const pathname = usePathname();
     const { visible, showShadow } = useNavbarScroll();
@@ -37,12 +45,12 @@ export function Navbar() {
 
     return (
         <>
-            <header id={styles.header_container} style={{
+            <header id={headerId} className={headerClass} style={{
                 top: visible ? '0' : '-100px',
                 transition: 'top 0.3s ease-in-out',
-                boxShadow: showShadow ? '0px 4px 8px 0px rgba(0, 0, 0, 0.2)' : 'none'
+                boxShadow: boxShadow
             }}>
-                <img src="/media/png/logo_horizontal.png" alt="" />
+                <img src={srcImage} alt="" />
                 <nav id={styles.nav_bar}>
                     {pages.map((page) => {
                         if (page.name === 'Loading...') {
@@ -78,6 +86,9 @@ export function Navbar() {
                 </nav>
                 <Tooltip anchorSelect="#clickable" clickable>
                     <button onClick={handleLogout}>Cerrar Sesión</button>
+                    <button onClick={toggleDarkMode}>
+                        {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                    </button>
                 </Tooltip>
                 <Hamburger />
             </header>

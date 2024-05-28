@@ -7,10 +7,30 @@ import { Footer } from '@components/_common/footer/Footer.jsx'
 import "./globals.css";
 import { metadata } from './metadata';
 import { UserProvider } from 'src/contexts/userContext';
+import { DarkModeProvider, useDarkMode } from 'src/contexts/darkModeContext';
 import { animateOnScroll } from '@services/animate-on-scroll'
 import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ["latin"] });
+
+function RootLayoutContent({ pathname, children }) {
+    const { darkMode } = useDarkMode();
+
+    return (
+        <html lang="en" className={darkMode ? 'dark' : ''}>
+            <head>
+                <title>{metadata.title}</title>
+                <meta name="description" content={metadata.description} />
+                <link rel="icon" href="/eladelreves.ico" />
+            </head>
+            <body className={inter.className}>
+                {pathname !== '/login' && pathname !== '/register' && <Navbar />}
+                {children}
+                {pathname !== '/login' && pathname !== '/register' && <Footer />}
+            </body>
+        </html>
+    );
+}
 
 export default function RootLayout({ children }) {
     const pathname = usePathname()
@@ -20,19 +40,12 @@ export default function RootLayout({ children }) {
     }, [pathname]);
 
     return (
-        <html lang="en">
-            <head>
-                <title>{metadata.title}</title>
-                <meta name="description" content={metadata.description} />
-                <link rel="icon" href="/eladelreves.ico" />
-            </head>
-            <body className={inter.className}>
-                <UserProvider>
-                    {pathname !== '/login' && pathname !== '/register' && <Navbar />}
+        <UserProvider>
+            <DarkModeProvider>
+                <RootLayoutContent pathname={pathname}>
                     {children}
-                    {pathname !== '/login' && pathname !== '/register' && <Footer />}
-                </UserProvider>
-            </body>
-        </html>
+                </RootLayoutContent>
+            </DarkModeProvider>
+        </UserProvider>
     );
 }

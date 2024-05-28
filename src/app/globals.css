@@ -6,6 +6,26 @@
 
 :root {
   --elaGreen: #74ad74;
+  --arrowcolor: #000000;
+  --dropshadow: drop-shadow(16px 7px 8px #939393);
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --scrollbar-track-color: rgb(219, 219, 219);
+  --scrollbar-thumb-color: var(--elaGreen);
+  --custom-arrow-color: var(--arrowcolor);
+}
+
+html.dark {
+  --elaGreen: #74ad74;
+  background-color: #181818;
+  --color: #e0e0e0;
+  --background-color: rgb(29, 29, 29);
+  --arrowcolor: #ffffff;
+  --dropshadow: drop-shadow(16px 7px 8px #2c2c2c);
+  color: #e0e0e0;
+  --scrollbar-track-color: #333333;
+  --scrollbar-thumb-color: var(--elaGreen);
+  --custom-arrow-color: var(--arrowcolor);
 }
 
 ::-webkit-scrollbar{

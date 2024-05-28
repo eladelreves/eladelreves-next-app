@@ -1,8 +1,13 @@
 'use client'
 import { useEffect, useRef } from 'react';
 import styles from './mainLogo.module.css'
+import { useDarkMode } from 'src/contexts/darkModeContext'; 
 
 export default function MainLogo() {
+    const { darkMode, toggleDarkMode } = useDarkMode(); 
+    const srcImage = darkMode ?  '/media/png/logo_main_dark_mode.png' : '/media/png/logo_main.png';
+    const headerClass = darkMode ?  `${styles.main_logo_dark}` : `${styles.main_logo_light}`;
+
     const logoRef = useRef(null);
     const h2Ref = useRef(null);
     const arrowRef = useRef(null);
@@ -43,9 +48,9 @@ export default function MainLogo() {
 
     return (
         <>
-            <main id={styles.main_logo}>
+            <main id={styles.main_logo} className={headerClass}>
                 <div>
-                    <img ref={logoRef} src={'/media/png/logo_main.png'} alt="Logo de ELA" />
+                    <img ref={logoRef} src={srcImage} alt="Logo de ELA" />
                     <h2 ref={h2Ref}>Sigue bajando para ayudarnos!</h2>
                     <div ref={arrowRef} id={styles.arrow} onClick={handleArrowClick}></div>
                 </div>
