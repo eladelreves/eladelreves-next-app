@@ -1,14 +1,33 @@
-import styles from './newCard.module.css'
+import { useEffect, useState } from 'react';
+import styles from './newCard.module.css';
+import { getAllNews } from '@services/News';
 
-export default function NewCard({ imgUrl, title, gridClassName }) {
+export default function NewCard({ gridClassName }) {
+    const [newsData, setNewsData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getAllNews();
+                setNewsData(data);
+            } catch (error) {
+                console.error('Error al obtener las noticias:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <>
-            <div className={`${styles.news_card} ${gridClassName}`} style={{ backgroundImage: `url(/media/news/matchDay.png)` }}>
-                <div className={styles.news_info}>
-                    <span>2 de febrero 2024</span>
-                    <h3>Hola a todes señores jejejejejejejejejjejejejejjejej</h3>
+            {newsData.map((item, index) => (
+                <div key={index} className={`${styles.news_card} ${gridClassName}`} style={{ backgroundImage: `url(${item.images[0]})` }}>
+                    <div className={styles.news_info}>
+                        <span>{new Date(item.createdAt.seconds * 1000).toLocaleDateString()}</span>
+                        <h3>{item.title}</h3>
+                    </div>
                 </div>
-            </div>
+            ))}
         </>
-    )
+    );
 }

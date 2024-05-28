@@ -1,14 +1,24 @@
 import styles from './contactData.module.css'
+import Swal from 'sweetalert2';
 
 export default function LegalPages() {
     const copyInClipboard = (text) => {
         navigator.clipboard.writeText(text)
             .then(() => {
-                alert('Texto copiado al portapapeles: ' + text)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Texto copiado al portapapeles:',
+                    text: text,
+                });
             })
             .catch(err => {
-                console.error('Error al copiar al portapapeles:', err)
-            })
+                console.error('Error al copiar al portapapeles:', err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un error al copiar al portapapeles.',
+                });
+            });
     }
 
     return (

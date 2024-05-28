@@ -17,3 +17,9 @@
     text-align: center;
     color: black;
 }
+
+@media (max-width: 530px) {
+    #videos_container  {
+        width: 350px;
+    }
+}
