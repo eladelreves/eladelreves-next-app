@@ -98,7 +98,7 @@
     font-size: 36px;
     margin-top: 50px;
     text-align: center;
-    color: black;
+    color: var(--color);
 }
 
 #user_videos{

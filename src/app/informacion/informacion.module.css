@@ -55,7 +55,12 @@
 }
 
 .table th {
-    background-color: #f2f2f2;
+    background-color: var(--background-color);
+}
+
+.a{
+    color: var(--color);
+    text-decoration: underline;
 }
 
 

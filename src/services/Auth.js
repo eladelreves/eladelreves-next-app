@@ -187,6 +187,7 @@ export const fetchVideosByUser = async (user) => {
             const url = await getDownloadURL(item);
             return url;
         }));
+        
         return urls;
     } catch (error) {
         console.error('Error al obtener los videos:', error);

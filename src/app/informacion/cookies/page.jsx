@@ -86,11 +86,11 @@ const Cookies = () => {
             <section className={styles.section}>
                 <h3>Eliminar cookies de su explorador</h3>
 
-                <p><b>●</b> <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias">Firefox</a></p>
-                <p><b>●</b> <a href="https://support.google.com/chrome/answer/95647?hl=es">Chrome</a></p>
-                <p><b>●</b> <a href="https://support.microsoft.com/es-es/windows/administrar-cookies-en-microsoft-edge-ver-permitir-bloquear-eliminar-y-usar-168dab11-0753-043d-7c16-ede5947fc64d">Internet Explorer</a></p>
-                <p><b>●</b> <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac">Safari</a></p>
-                <p><b>●</b> <a href="https://allaboutcookies.org/es-administrar-las-cookies-en-opera">Opera</a></p>
+                <p><b>●</b> <a className={styles.a} href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias">Firefox</a></p>
+                <p><b>●</b> <a className={styles.a} href="https://support.google.com/chrome/answer/95647?hl=es">Chrome</a></p>
+                <p><b>●</b> <a className={styles.a} href="https://support.microsoft.com/es-es/windows/administrar-cookies-en-microsoft-edge-ver-permitir-bloquear-eliminar-y-usar-168dab11-0753-043d-7c16-ede5947fc64d">Internet Explorer</a></p>
+                <p><b>●</b> <a className={styles.a} href="https://support.apple.com/es-es/guide/safari/sfri11471/mac">Safari</a></p>
+                <p><b>●</b> <a className={styles.a} href="https://allaboutcookies.org/es-administrar-las-cookies-en-opera">Opera</a></p>
             </section>
         </div>
     );
