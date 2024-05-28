@@ -4,7 +4,7 @@ import styles from '../informacion.module.css'
 const Politicadeprivacidad = () => {
     return (
         <div id={styles.container}>
-            <h1 id={styles.h1}>Política de <span className='elaGreen'>privacidad</span></h1>
+            <h2>Política de <span className='elaGreen'>privacidad</span></h2>
 
             <section className={styles.section}>
                 <h3>1. INFORMACIÓN AL USUARIO</h3>
@@ -73,7 +73,7 @@ const Politicadeprivacidad = () => {
 
             <section className={styles.section}>
                 <h3>7. SUS DERECHOS</h3>
-                
+
                 <p>En relación con la recogida y tratamiento de sus datos personales, puede ponerse en contacto con nosotros en cualquier momento para:</p>
 
                 <p><b>●</b> Acceder a sus datos personales y a cualquier otra información indicada en el Artículo 15.1 del RGPD.</p>

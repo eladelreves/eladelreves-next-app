@@ -1,7 +1,11 @@
-#container{
-    margin: auto !important;
+#container {
     width: 80%;
     text-align: justify;
+    margin: 100px auto;
+}
+
+#container h2 {
+    text-align: center;
 }
 
 #container h3 {
@@ -21,6 +25,10 @@
     margin-top: 30px;
     border-bottom: .5px solid rgb(180, 180, 180);
     padding-bottom: 20px;
+}
+
+#container .section:last-child{
+    border-bottom: none;
 }
 
 #h1{

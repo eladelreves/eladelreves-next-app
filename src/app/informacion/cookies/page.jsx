@@ -4,7 +4,7 @@ import styles from '../informacion.module.css'
 const Cookies = () => {
     return (
         <div id={styles.container}>
-            <h1 id={styles.h1}>Política de <span className='elaGreen'>Cookies</span></h1>
+            <h2>Política de <span className='elaGreen'>Cookies</span></h2>
 
             <section className={styles.section}>
                 <h3>Nuestra política de cookies</h3>

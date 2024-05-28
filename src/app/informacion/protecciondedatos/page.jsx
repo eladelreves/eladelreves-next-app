@@ -4,26 +4,26 @@ import styles from '../informacion.module.css'
 const Protecciondedatos = () => {
     return (
         <div id={styles.container}>
-            <h1 id={styles.h1}>Protección de <span className='elaGreen'>datos</span></h1>
+            <h2>Protección de <span className='elaGreen'>datos</span></h2>
 
             <section className={styles.section}>
                 <h3>TÉRMINOS Y CONDICIONES</h3>
 
                 <p>Responsable del tratamiento: ITX MERKEN, B.V.</p>
 
-                <p style={{textDecoration: 'underline'}}>Finalidad y base de legitimación:</p>
+                <p style={{ textDecoration: 'underline' }}>Finalidad y base de legitimación:</p>
                 <p>Si estás de acuerdo, publicaremos tu fotografía y algunos datos personales (ej. nombre de usuario de la red social) en los sitios web de los países en los que ElaDelRevés opera. El motivo por el que estaremos legitimados para usar tus datos es el consentimiento que nos prestas al contestar al mensaje que te hemos enviado con el hashtag #yesElaDelRevés.</p>
 
-                <p style={{textDecoration: 'underline'}}>Destinatarios de los datos:</p>
+                <p style={{ textDecoration: 'underline' }}>Destinatarios de los datos:</p>
                 <p>Compartimos tus datos con prestadores de servicios y colaboradores dentro y fuera de la Unión Europea que nos dan soporte en el envío de la información, y lo hacemos con las garantías apropiadas y guardando la seguridad de tus datos.</p>
 
-                <p style={{textDecoration: 'underline'}}>Derechos:</p>
+                <p style={{ textDecoration: 'underline' }}>Derechos:</p>
                 <p>Puedes retirar tu consentimiento en cualquier momento y sin coste alguno, además de ejercitar otros derechos como te explicamos en las cláusulas 11 y 8 de este documento.</p>
 
-                <p style={{textDecoration: 'underline'}}>Información adicional:</p>
+                <p style={{ textDecoration: 'underline' }}>Información adicional:</p>
                 <p>Para más información, consulta la cláusula 8 de este documento y la Política de Privacidad de ElaDelRevés disponible en www.ElaDelRevés.com.</p>
             </section>
-            
+
             <section className={styles.section}>
                 <h3>1. Términos y Condiciones y aceptación</h3>
 
