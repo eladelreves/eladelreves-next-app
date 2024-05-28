@@ -1,7 +1,7 @@
 'use client'
 import './carrousel.css'
 
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import {
   NextButton,
@@ -10,12 +10,15 @@ import {
 } from './EmblaCarouselArrowButtons'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 
+import { getAllNews } from '@services/News';
 import NewCard from '@components/_templates/newCard/NewCard'
 import Autoplay from 'embla-carousel-autoplay'
 
 const TWEEN_FACTOR_BASE = 0.2
 
 const NewsSlider = () => {
+
+  const [newsData, setNewsData] = useState([]);
   const SLIDE_COUNT = 5
   const options = { dragFree: true, loop: true }
   const slides = Array.from(Array(SLIDE_COUNT).keys())
@@ -114,20 +117,33 @@ const NewsSlider = () => {
       .on('scroll', tweenParallax)
       .on('slideFocus', tweenParallax)
   }, [emblaApi, tweenParallax])
+  
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const data = await getAllNews();
+            setNewsData(data);
+        } catch (error) {
+            console.error('Error al obtener las noticias:', error);
+        }
+    };
+
+    fetchData();
+}, []);
 
   return (
     <div className="embla animate-on-scroll">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((index) => (
+        {newsData.map((item, index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__parallax">
-                <div className="embla__parallax__layer">
-                  <NewCard className="embla__slide__img embla__parallax__img"></NewCard>
+                <div className="embla__parallax">
+                    <div className="embla__parallax__layer">
+                        <NewCard gridClassName="embla__slide__img embla__parallax__img" item={item} />
+                    </div>
                 </div>
-              </div>
             </div>
-          ))}
+        ))}
         </div>
       </div>
 
