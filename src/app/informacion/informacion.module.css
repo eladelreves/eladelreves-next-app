@@ -18,8 +18,9 @@
 
 .section{
     width: 100%;
-    margin-top: 20px;
+    margin-top: 30px;
     border-bottom: .5px solid rgb(180, 180, 180);
+    padding-bottom: 20px;
 }
 
 #h1{
