@@ -1,6 +1,8 @@
+'use client'
 import { format } from 'date-fns';
 import styles from './newCard2.module.css'
 import { es } from 'date-fns/locale';
+import Link from 'next/link';
 
 export default function NewCard2({ gridClassName, data }) {
     const formatDate = (timestamp) => {
@@ -13,12 +15,12 @@ export default function NewCard2({ gridClassName, data }) {
     return (
         <>
             {data &&
-                <div className={`${styles.news_card} ${gridClassName}`} style={{ backgroundImage: `url(${data.images[0]})` }}>
+                <Link href={'/noticias/detalle?id=' + data.id} className={`${styles.news_card} ${gridClassName}`} style={{ backgroundImage: `url(${data.images[0]})` }}>
                     <div className={styles.news_info}>
                         <span>{formatDate(data.createdAt)}</span>
                         <h3>{data.title}</h3>
                     </div>
-                </div>
+                </Link>
             }
         </>
     )

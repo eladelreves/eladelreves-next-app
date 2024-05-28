@@ -28,12 +28,6 @@ export default function AddNewForm() {
         ],
     }
 
-    const customStyles = {
-        content: {
-            overflow: 'hidden',
-        },
-    };
-
     return (
         <>
             <div id={styles.add_new_button_container}>

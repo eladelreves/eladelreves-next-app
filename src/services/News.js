@@ -1,7 +1,8 @@
 import firebaseConfig from "firebase.config";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore, serverTimestamp, updateDoc } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, orderBy, limit, query, serverTimestamp, updateDoc, getDoc, doc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import Swal from "sweetalert2";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -25,21 +26,61 @@ export const insertNew = async (title, body, images) => {
             })
         );
 
+        Swal.fire({
+            title: 'Subiendo notivia...',
+            text: 'Por favor, espera mientras se sube la noticia.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
         await updateDoc(newsDocRef, {
             images: imageUrls
         });
 
-        alert('Noticia agregada exitosamente');
+        Swal.fire({
+            icon: 'success',
+            title: '!Noticia añadida!',
+        }).then(() => {
+            window.location.href = '/noticias';
+        });
     } catch (error) {
-        console.error("Error adding document: ", error);
+        Swal.fire({
+            icon: 'error',
+            title: "Error",
+            text: "Error al añadir la noticia.",
+        })
     }
 }
 
-export const getAllNews = async () => {
+export const getLatestNews = async (newsLimit) => {
     // Simulamos un retraso de 3 segundos
     await new Promise(resolve => setTimeout(resolve, 700));
-    
-    const querySnapshot = await getDocs(collection(db, "news"));
-    const newsData = querySnapshot.docs.map(doc => doc.data());
+
+    const newsRef = collection(db, "news");
+    const newsQuery = newsLimit 
+        ? query(newsRef, orderBy("createdAt", "desc"), limit(newsLimit))
+        : query(newsRef, orderBy("createdAt", "desc"));
+
+    const querySnapshot = await getDocs(newsQuery);
+    const newsData = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));
     return newsData;
+}
+
+export const getNewById = async (id) => {
+    const newsRef = doc(db, 'news', id);
+    const docSnap = await getDoc(newsRef);
+
+    if (docSnap.exists()) {
+        return {
+            id: docSnap.id,
+            ...docSnap.data()
+        };
+    } else {
+        throw new Error('No such document!');
+    }
 };

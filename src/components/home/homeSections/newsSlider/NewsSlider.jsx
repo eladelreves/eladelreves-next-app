@@ -10,7 +10,7 @@ import {
 } from './EmblaCarouselArrowButtons'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 
-import { getAllNews } from '@services/News';
+import { getLatestNews } from '@services/News';
 import NewCard from '@components/_templates/newCard/NewCard'
 import Autoplay from 'embla-carousel-autoplay'
 
@@ -117,33 +117,33 @@ const NewsSlider = () => {
       .on('scroll', tweenParallax)
       .on('slideFocus', tweenParallax)
   }, [emblaApi, tweenParallax])
-  
+
   useEffect(() => {
     const fetchData = async () => {
-        try {
-            const data = await getAllNews();
-            setNewsData(data);
-        } catch (error) {
-            console.error('Error al obtener las noticias:', error);
-        }
+      try {
+        const data = await getLatestNews(5);
+        setNewsData(data);
+      } catch (error) {
+        console.error('Error al obtener las noticias:', error);
+      }
     };
 
     fetchData();
-}, []);
+  }, []);
 
   return (
     <div className="embla animate-on-scroll">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-        {newsData.map((item, index) => (
+          {newsData.map((item, index) => (
             <div className="embla__slide" key={index}>
-                <div className="embla__parallax">
-                    <div className="embla__parallax__layer">
-                        <NewCard gridClassName="embla__slide__img embla__parallax__img" item={item} />
-                    </div>
+              <div className="embla__parallax">
+                <div className="embla__parallax__layer">
+                  <NewCard item={item} />
                 </div>
+              </div>
             </div>
-        ))}
+          ))}
         </div>
       </div>
 
