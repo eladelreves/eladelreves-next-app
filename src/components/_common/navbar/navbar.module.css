@@ -96,6 +96,28 @@
     }
 }
 
+.tooltip{
+    display: block;
+    text-align: center;
+}
+
+.tooltip button{
+    display: inline-block;
+    background: var(--elaGreen);
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 18px;
+    transition: .5s linear;
+}
+
+.tooltip button:hover{
+    background-color: rgb(152, 0, 0);
+}
+
 /* Dark mode */
 
 .dark{

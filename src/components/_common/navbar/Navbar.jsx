@@ -10,6 +10,7 @@ import styles from './navbar.module.css';
 import { ThreeDots } from 'react-loader-spinner';
 import { Tooltip } from 'react-tooltip'
 import { useDarkMode } from 'src/contexts/darkModeContext'; 
+import DarkModeToggleButton from './darkmodeButton/DarkModeButton'
 
 export function Navbar() {
     const { darkMode, toggleDarkMode } = useDarkMode(); 
@@ -84,11 +85,10 @@ export function Navbar() {
                         )
                     })}
                 </nav>
-                <Tooltip anchorSelect="#clickable" clickable>
+                <Tooltip className={styles.tooltip} anchorSelect="#clickable" clickable>
                     <button onClick={handleLogout}>Cerrar Sesión</button>
-                    <button onClick={toggleDarkMode}>
-                        {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                    </button>
+                    <br />
+                    <DarkModeToggleButton />
                 </Tooltip>
                 <Hamburger />
             </header>
