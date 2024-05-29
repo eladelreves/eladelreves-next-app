@@ -2,8 +2,7 @@
 
 import styles from './addNewForm.module.css'
 import Modal from 'react-modal';
-import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { insertNew } from '@services/News'
 import ReactQuill from 'react-quill'
@@ -27,6 +26,14 @@ export default function AddNewForm() {
             ['link']
         ],
     }
+
+    useEffect(() => {
+        if (modalIsOpen) {
+            document.querySelector('body').style.overflow = 'hidden';
+        } else {
+            document.querySelector('body').style.overflow = 'visible';
+        }
+    }, [modalIsOpen]);
 
     return (
         <>
@@ -65,10 +72,9 @@ export default function AddNewForm() {
                     <button id={styles.add_new_button} styles={{ position: 'static' }} type="submit">Agregar Noticia</button>
                 </form>
 
-                <img src='/icons/close.svg' onClick={() => {
-                    setModalIsOpen(false);
-                    document.querySelector('body').style.overflow = 'visible'
-                }}
+                <img
+                    src="/icons/close.svg"
+                    onClick={() => setModalIsOpen(false)}
                 />
             </Modal>
         </>
