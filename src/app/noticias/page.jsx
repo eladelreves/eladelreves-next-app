@@ -7,13 +7,13 @@ import GridContainerSkeleton from '../../components/news/gridContainer/GridConta
 export default function Noticias() {
     return (
         <>
-            <h2 id={styles.h2}>¿Qué está <span className="elaGreen">pasando</span>?</h2>
+            {/* <h2 id={styles.h2}>¿Qué está <span className="elaGreen">pasando</span>?</h2>
 
             <AddNewForm></AddNewForm>
 
             <Suspense fallback={<GridContainerSkeleton />}>
                 <GridContainer></GridContainer>
-            </Suspense>
+            </Suspense> */}
         </>
     );
 }
