@@ -121,7 +121,7 @@ export function getCurrentUser() {
 
 export const uploadProfilePhoto = async (selectedFile, user) => {
     const storage = getStorage();
-    const storageRef = ref(storage);
+    const storageRef = ref(storage, `images/${user.uid}`);
     const fileRef = ref(storageRef, selectedFile.name);
     await uploadBytes(fileRef, selectedFile);
 
