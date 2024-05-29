@@ -125,6 +125,7 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
     try {
         const listResult = await listAll(storageRef);
         
+        //Borrar anteriores
         const deletePromises = listResult.items.map(itemRef => deleteObject(itemRef));
         await Promise.all(deletePromises);
 
