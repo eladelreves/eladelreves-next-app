@@ -5,7 +5,12 @@ import Modal from 'react-modal';
 import { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { insertNew } from '@services/News'
-import ReactQuill from 'react-quill'
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(() => import('react-quill'), {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+});
 
 export default function AddNewForm() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -29,6 +34,7 @@ export default function AddNewForm() {
 
     const handleClick = () => {
         setModalIsOpen(!modalIsOpen);
+        document.querySelector('body').style.overflow = modalIsOpen ? 'visible' : 'hidden';
     };
 
     return (
