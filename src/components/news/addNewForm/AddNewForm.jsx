@@ -2,7 +2,7 @@
 
 import styles from './addNewForm.module.css'
 import Modal from 'react-modal';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { insertNew } from '@services/News'
 import ReactQuill from 'react-quill'
@@ -27,18 +27,15 @@ export default function AddNewForm() {
         ],
     }
 
-    useEffect(() => {
-        if (modalIsOpen) {
-            document.querySelector('body').style.overflow = 'hidden';
-        } else {
-            document.querySelector('body').style.overflow = 'visible';
-        }
-    }, [modalIsOpen]);
+    const handleClick = () => {
+        setModalIsOpen(!modalIsOpen);
+        document.querySelector('body').style.overflow = modalIsOpen ? 'visible' : 'hidden';
+    };
 
     return (
         <>
             <div id={styles.add_new_button_container}>
-                <button id={styles.add_new_button} onClick={() => { setModalIsOpen(true); document.querySelector('body').style.overflow = modalIsOpen ? 'visible' : 'hidden' }} src="/icons/edit.svg" alt="">
+                <button id={styles.add_new_button} onClick={handleClick} src="/icons/edit.svg" alt="">
                     Añadir Noticia
                 </button>
             </div>
@@ -74,7 +71,7 @@ export default function AddNewForm() {
 
                 <img
                     src="/icons/close.svg"
-                    onClick={() => setModalIsOpen(false)}
+                    onClick={handleClick}
                 />
             </Modal>
         </>
