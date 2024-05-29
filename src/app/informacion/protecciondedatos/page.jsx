@@ -41,7 +41,7 @@ const Protecciondedatos = () => {
 
                 <p><b>2.3 </b>El usuario se abstendrá de utilizar los Servicios con fines o efectos ilícitos, prohibidos en estos Términos y Condiciones, lesivos de los derechos e intereses de terceros, o que de cualquier forma puedan dañar, inutilizar, sobrecargar, deteriorar o impedir la normal utilización de los Servicios, los equipos informáticos o los documentos, archivos y toda clase de contenidos almacenados en cualquier equipo informático de ElaDelRevés o de otros usuarios.</p>
 
-                <p><b>2.4 </b>El usuario se compromete a no transmitir, difundir o poner a disposición de terceros a través de los Servicios cualquier tipo de material que pueda constituir un acto de competencia desleal, publicidad no deseada, "spam", o que contenga virus informáticos o cualquier otro código, archivo o programa diseñado para interrumpir, destruir o limitar el funcionamiento de cualquier software, hardware o equipo de telecomunicaciones.</p>
+                <p><b>2.4 </b>El usuario se compromete a no transmitir, difundir o poner a disposición de terceros a través de los Servicios cualquier tipo de material que pueda constituir un acto de competencia desleal, publicidad no deseada, &quot;spam&quot;, o que contenga virus informáticos o cualquier otro código, archivo o programa diseñado para interrumpir, destruir o limitar el funcionamiento de cualquier software, hardware o equipo de telecomunicaciones.</p>
 
                 <p><b>2.5 </b>ElaDelRevés se reserva el derecho de denegar o retirar el acceso a los Servicios, en cualquier momento y sin necesidad de preaviso, a aquellos usuarios que incumplan estos Términos y Condiciones o cualquier condición particular que resulte de aplicación.</p>
 
