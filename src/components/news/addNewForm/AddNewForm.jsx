@@ -29,7 +29,6 @@ export default function AddNewForm() {
 
     const handleClick = () => {
         setModalIsOpen(!modalIsOpen);
-        document.querySelector('body').style.overflow = modalIsOpen ? 'visible' : 'hidden';
     };
 
     return (
