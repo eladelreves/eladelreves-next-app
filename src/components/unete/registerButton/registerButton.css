@@ -8,7 +8,7 @@
 }
 
 #registerButton {
-  --primary-color: var(--color);
+  color: var(--color);
   --hovered-color: var(--elaGreen);
   position: relative;
   display: flex;
