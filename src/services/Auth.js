@@ -122,19 +122,20 @@ export function getCurrentUser() {
 export const uploadProfilePhoto = async (selectedFile, user) => {
     const storage = getStorage();
     const storageRef = ref(storage, `images/${user.uid}`);
-    const fileRef = ref(storageRef, selectedFile.name);
-    await uploadBytes(fileRef, selectedFile);
-
-    // Obtener la URL de descarga del archivo subido
-    const downloadURL = await getDownloadURL(fileRef);
-
-    // const user = auth.currentUser;
-
     try {
+        const listResult = await listAll(storageRef);
+        
+        const deletePromises = listResult.items.map(itemRef => deleteObject(itemRef));
+        await Promise.all(deletePromises);
+
+        const fileRef = ref(storageRef, selectedFile.name);
+        await uploadBytes(fileRef, selectedFile);
+
+        const downloadURL = await getDownloadURL(fileRef);
+
         await updateProfile(user, {
             photoURL: downloadURL
         });
-        console.log('Campo "photoURL" actualizado correctamente.');
     } catch (error) {
         console.error('Error al actualizar el campo "photoURL":', error);
     }
