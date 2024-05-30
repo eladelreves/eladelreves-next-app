@@ -20,8 +20,8 @@ export default function PasswordInput({ handleChange, name }) {
                     type={isVisible ? 'password' : 'text'}
                     onChange={handleChange}
                 />
-                <span
-                    className={isVisible ? 'icon-remove_red_eye' : 'icon-visibility_off'}
+                <img
+                    src={isVisible ? '/icons/visibility.svg': '/icons/visibility-off.svg'}
                     onClick={toggleVisibility}
                 />
             </div>
