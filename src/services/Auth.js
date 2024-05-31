@@ -1,14 +1,8 @@
-import firebaseConfig from "firebase.config";
-import { initializeApp } from "firebase/app";
+import { auth } from "firebase.config";
 import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import Swal from "sweetalert2";
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app); // Obtenemos la instancia de almacenamiento de Firebase
-const auth = getAuth();
 
 // export const registerUser = async (formData) => {
 //     // Verificar si el nombre de usuario ya está registrado
@@ -65,12 +59,12 @@ export const registerUser = async (formData) => {
 
 export const resetPassword = (email) => {
     sendPasswordResetEmail(auth, email)
-    .then(() => {
+        .then(() => {
 
-    })
-    .catch((error) => {
+        })
+        .catch((error) => {
 
-    });
+        });
 }
 
 export const login = async (formData) => {
@@ -124,7 +118,7 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
     const storageRef = ref(storage, `images/${user.uid}`);
     try {
         const listResult = await listAll(storageRef);
-        
+
         //Borrar anteriores
         const deletePromises = listResult.items.map(itemRef => deleteObject(itemRef));
         await Promise.all(deletePromises);
@@ -143,12 +137,12 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
 }
 
 export const uploadVideo = async (selectedFile, user) => {
-    try{
+    try {
         const storage = getStorage();
         const videosRef = ref(storage, `videos/${user.uid}`);
         //const videosRef = ref(storage, `videos/`);
         const fileRef = ref(videosRef, selectedFile.name);
-        
+
         Swal.fire({
             title: 'Subiendo video...',
             text: 'Por favor, espera mientras se sube el video.',
@@ -170,7 +164,7 @@ export const uploadVideo = async (selectedFile, user) => {
         });
 
         return downloadURL;
-    }catch (error) {
+    } catch (error) {
         Swal.fire({
             icon: 'error',
             title: "Error",
@@ -184,12 +178,12 @@ export const fetchVideosByUser = async (user) => {
         const storage = getStorage();
         const videosRef = ref(storage, `videos/${user?.uid}`);
         const videoList = await listAll(videosRef);
-        
+
         const urls = await Promise.all(videoList.items.map(async (item) => {
             const url = await getDownloadURL(item);
             return url;
         }));
-        
+
         return urls;
     } catch (error) {
         console.error('Error al obtener los videos:', error);

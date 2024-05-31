@@ -1,12 +1,7 @@
-import firebaseConfig from "firebase.config";
-import { initializeApp } from "firebase/app";
+import { db, storage } from "firebase.config";
 import { addDoc, collection, getDocs, getFirestore, orderBy, limit, query, serverTimestamp, updateDoc, getDoc, doc, deleteDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Swal from "sweetalert2";
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app);
 
 export const insertNew = async (title, body, images) => {
     try {
@@ -59,7 +54,7 @@ export const getLatestNews = async (newsLimit) => {
     await new Promise(resolve => setTimeout(resolve, 700));
 
     const newsRef = collection(db, "news");
-    const newsQuery = newsLimit 
+    const newsQuery = newsLimit
         ? query(newsRef, orderBy("createdAt", "desc"), limit(newsLimit))
         : query(newsRef, orderBy("createdAt", "desc"));
 
@@ -87,7 +82,7 @@ export const getNewById = async (id) => {
 
 export const deleteNews = async (newsId) => {
     const newsRef = doc(db, 'news', newsId);
-    
+
     Swal.fire({
         title: '¿Estás seguro?',
         text: "¡No podrás revertir esto!",
@@ -114,7 +109,7 @@ export const deleteNews = async (newsId) => {
                     text: error.message,
                 });
                 console.error('Error al eliminar la noticia:', error);
-            } 
+            }
         }
     });
 };
