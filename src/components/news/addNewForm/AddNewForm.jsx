@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
 import styles from './addNewForm.module.css'
 import Modal from 'react-modal';
 import { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
-import { insertNew } from '@services/News'
+import { insertNew } from '@services/News';
 import dynamic from 'next/dynamic';
 import { useUser } from 'src/contexts/userContext';
 
@@ -20,10 +20,31 @@ export default function AddNewForm() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [images, setImages] = useState([]);
+    const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        insertNew(title, content, images);
+        let errorMessages = [];
+
+        if (title.length > 30) {
+            errorMessages.push('El título no debe exceder los 30 caracteres.');
+        }
+        if (content.length > 2000) {
+            errorMessages.push('El contenido no debe exceder los 2000 caracteres.');
+        }
+        
+        if (errorMessages.length > 0) {
+            setErrors(errorMessages);
+            return;
+        }
+
+        setErrors([]);
+        await insertNew(title, content, images);
+
+        setTitle('');
+        setContent('');
+        setImages([]);
+        setModalIsOpen(false);
     };
 
     const modules = {
@@ -32,7 +53,7 @@ export default function AddNewForm() {
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             ['link']
         ],
-    }
+    };
 
     const handleClick = () => {
         setModalIsOpen(!modalIsOpen);
@@ -49,7 +70,6 @@ export default function AddNewForm() {
                 </div>
             )}
             
-
             <Modal ariaHideApp={false} id={styles.add_new_form} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={{ content: { overflow: 'hidden' } }}>
                 <form onSubmit={handleSubmit}>
                     <input
@@ -76,6 +96,13 @@ export default function AddNewForm() {
                             onChange={(e) => setImages(Array.from(e.target.files))}
                         />
                     </div>
+                    {errors.length > 0 && (
+                        <div className={styles.error}>
+                            {errors.map((error, index) => (
+                                <p key={index}>{error}</p>
+                            ))}
+                        </div>
+                    )}
                     <button id={styles.add_new_button} styles={{ position: 'static' }} type="submit">Agregar Noticia</button>
                 </form>
 
@@ -85,5 +112,5 @@ export default function AddNewForm() {
                 />
             </Modal>
         </>
-    )
+    );
 }
