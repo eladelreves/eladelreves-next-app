@@ -53,3 +53,8 @@
 @media (max-width: 1024px) {
     .news_card {height: 250px;}
 }
+
+#bin{
+    z-index: 10000;
+    position: absolute;
+}

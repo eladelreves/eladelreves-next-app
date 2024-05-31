@@ -1,6 +1,6 @@
 import firebaseConfig from "firebase.config";
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, getDocs, getFirestore, orderBy, limit, query, serverTimestamp, updateDoc, getDoc, doc } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, orderBy, limit, query, serverTimestamp, updateDoc, getDoc, doc, deleteDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Swal from "sweetalert2";
 
@@ -83,4 +83,38 @@ export const getNewById = async (id) => {
     } else {
         throw new Error('No such document!');
     }
+};
+
+export const deleteNews = async (newsId) => {
+    const newsRef = doc(db, 'news', newsId);
+    
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'No, cancelar'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                await deleteDoc(newsRef);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Noticia eliminada con éxito',
+                }).then(() => {
+                    window.location.href = '/noticias'
+                });
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al eliminar la noticia',
+                    text: error.message,
+                });
+                console.error('Error al eliminar la noticia:', error);
+            } 
+        }
+    });
 };

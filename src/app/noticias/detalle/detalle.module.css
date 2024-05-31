@@ -72,3 +72,14 @@
     display: block;
     transition: all 0.5s;
 }
+
+#bin{
+    cursor: pointer;
+    padding: 5px;
+    transition: .5s;
+    border-radius: 50px;
+}
+
+#bin:hover{
+    background-color: white;
+}

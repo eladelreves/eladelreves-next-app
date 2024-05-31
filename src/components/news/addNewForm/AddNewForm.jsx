@@ -6,6 +6,7 @@ import { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { insertNew } from '@services/News'
 import dynamic from 'next/dynamic';
+import { useUser } from 'src/contexts/userContext';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
     ssr: false,
@@ -14,6 +15,7 @@ const ReactQuill = dynamic(() => import('react-quill'), {
 
 export default function AddNewForm() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const { user } = useUser();
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -39,11 +41,14 @@ export default function AddNewForm() {
 
     return (
         <>
-            <div id={styles.add_new_button_container}>
-                <button id={styles.add_new_button} onClick={handleClick} src="/icons/edit.svg" alt="">
-                    Añadir Noticia
-                </button>
-            </div>
+            {user && (
+                <div id={styles.add_new_button_container}>
+                    <button id={styles.add_new_button} onClick={handleClick} src="/icons/edit.svg" alt="">
+                        Añadir Noticia
+                    </button>
+                </div>
+            )}
+            
 
             <Modal ariaHideApp={false} id={styles.add_new_form} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={{ content: { overflow: 'hidden' } }}>
                 <form onSubmit={handleSubmit}>
