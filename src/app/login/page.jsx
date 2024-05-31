@@ -50,7 +50,7 @@ export default function Login() {
                         <label htmlFor="loginPassword">Contraseña</label>
                         <PasswordInput handleChange={handleChange} name='loginPassword' />
 
-                        <Link href='' onClick={async () => {
+                        <Link id={styles.forgotten_password} href='' onClick={async () => {
                             const { value: email } = await Swal.fire({
                                 title: "Correo de recuperación",
                                 input: "email",

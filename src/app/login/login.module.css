@@ -86,7 +86,7 @@
     border-radius: 20px;
 
     margin-bottom: 25px;
-    padding-left: 25px;
+    padding-left: 20px;
     padding-right: 25px;
 }
 
@@ -166,17 +166,36 @@
         right: 85%;
     }
     .sign_container  {
-        height: 700px;
+        height: 500px;
         width: 80%;
         flex-direction: column;
     }
+
     .sign_logo img{
         display: none;
     }
+
     .sign_logo{
         width: 100%;
+        height: auto;
+        padding: 25px 0;
     }
+
     .sign_form{
         width: 100%;
+        height: auto;
+        padding: 50px 0;
+    }
+
+    .sign_form label {
+        font-size: 15px;
+    }
+
+    .sign_form h2 {
+        font-size: 25px;
+    }
+
+    #forgotten_password {
+        font-size: 15px;
     }
 }
