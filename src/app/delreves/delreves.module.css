@@ -12,7 +12,6 @@
 }
 
 #delreves_title {
-    font-size: 50px;
     margin-top: 50px;
     text-align: center;
     color: var(--color);
@@ -20,6 +19,7 @@
 
 @media (max-width: 530px) {
     #videos_container  {
+        height: 530px;
         width: 350px;
     }
 }

@@ -96,3 +96,9 @@ h2 {
   height: 250px;
   max-height: 250px;
 }
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 20pt;
+  }
+}

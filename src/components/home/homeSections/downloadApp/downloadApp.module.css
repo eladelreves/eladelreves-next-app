@@ -56,10 +56,6 @@
 }
 
 @media (834px < width <= 1024px){
-	#downloadApp h2 {
-		font-size: 20px;
-	}
-    
     #downloadApp p {
         font-size: 12px;
     }
