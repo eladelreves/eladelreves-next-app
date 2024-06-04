@@ -58,3 +58,7 @@
     z-index: 10000;
     position: absolute;
 }
+
+.news_card:hover{
+    transform: scale(1.02);
+}

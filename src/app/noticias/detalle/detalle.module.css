@@ -57,6 +57,10 @@
     text-align: justify;
 }
 
+#news_body p span{
+    color: var(--color);
+}
+
 #news_images {
     display: flex;
     align-items: center;
@@ -82,4 +86,10 @@
 
 #bin:hover{
     background-color: white;
+}
+
+@media (max-width: 656px) {
+    #news_images {
+        width: 75%;
+    }
 }

@@ -1,6 +1,6 @@
 #grid_container, #grid_container_skeleton {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     width: 80%;
     margin: 100px auto;
@@ -11,7 +11,7 @@
 }
 
 .large {
-    grid-column: span 3;
+    width: 700px;
 }
 
 .medium {
@@ -19,9 +19,16 @@
 }
 
 .small {
-    grid-column: span 1;
+    width: 250px;
 }
 
 #grid_container_skeleton > div {
     width: 250px;
 }
+
+@media (max-width: 656px) {
+    #grid_container {
+        align-items: center;
+        justify-content: center;
+    }
+  }

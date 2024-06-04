@@ -26,7 +26,7 @@ export default function AddNewForm() {
         e.preventDefault();
         let errorMessages = [];
 
-        if (title.length > 30) {
+        if (title.length > 40) {
             errorMessages.push('El título no debe exceder los 30 caracteres.');
         }
         if (content.length > 2000) {

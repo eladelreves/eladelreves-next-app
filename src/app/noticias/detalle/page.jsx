@@ -41,7 +41,7 @@ export default function Detalle() {
         }
     }, [newsItem]);
 
-    const adminUID = 'gnEsJq2qmoWCoAxQhZj1d8zWtSC3';
+    const adminUID = 'mAtttYUrNsWUprl64bLYXQFfPl12';
     const { user } = useUser();
 
     const currentUserUID = user ? user.uid : '0';
