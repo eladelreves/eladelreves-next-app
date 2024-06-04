@@ -1,4 +1,4 @@
-import { auth } from "firebase.config";
+import { auth, storage } from "firebase.config";
 import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
@@ -114,7 +114,6 @@ export function getCurrentUser() {
 }
 
 export const uploadProfilePhoto = async (selectedFile, user) => {
-    const storage = getStorage();
     const storageRef = ref(storage, `images/${user.uid}`);
     try {
         const listResult = await listAll(storageRef);
@@ -131,6 +130,8 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
         await updateProfile(user, {
             photoURL: downloadURL
         });
+
+        return true;
     } catch (error) {
         console.error('Error al actualizar el campo "photoURL":', error);
     }
@@ -138,7 +139,6 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
 
 export const uploadVideo = async (selectedFile, user) => {
     try {
-        const storage = getStorage();
         const videosRef = ref(storage, `videos/${user.uid}`);
         //const videosRef = ref(storage, `videos/`);
         const fileRef = ref(videosRef, selectedFile.name);
