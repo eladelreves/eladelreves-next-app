@@ -32,13 +32,11 @@ export default function Perfil() {
         file && reader.readAsDataURL(file);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        uploadProfilePhoto(selectedFile, user)
         setModalIsOpen(false);
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
+        const result = await uploadProfilePhoto(selectedFile, user)
+        if (result) window.location.reload();
     };
 
 
@@ -106,7 +104,7 @@ export default function Perfil() {
                 <img src='/icons/close.svg' onClick={() => setModalIsOpen(false)} />
             </Modal>
             <br /><br /><br />
-            {videos.length > 0 ? (
+            {videos?.length > 0 ? (
                 <>
                     <h2 className={styles.videos_title}>Tus <span className='elaGreen'>videos!</span></h2>
                     <br /><br /><br /><br />
