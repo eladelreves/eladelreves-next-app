@@ -125,6 +125,7 @@ export default function Perfil() {
             ) : (
                 <>
                     <h2 className={styles.videos_title}>¡Sube tu <span className='elaGreen'>primer video</span>!</h2>
+                    <br /><br />
                     <VideoForm></VideoForm>
                     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 </>

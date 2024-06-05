@@ -1,3 +1,14 @@
+.custom_file_upload {
+    display: inline-block;
+    font-family: 'Inter';
+    background: green;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
 #custom_file_upload {
     display: inline-block;
     background: var(--elaGreen);
