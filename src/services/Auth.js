@@ -134,6 +134,11 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
             photoURL: downloadURL
         });
 
+        const userDocRef = doc(db, 'users', user.uid);
+        await updateDoc(userDocRef, {
+            photoURL: downloadURL
+        });
+
         return true;
     } catch (error) {
         console.error('Error al actualizar el campo "photoURL":', error);
