@@ -5,6 +5,15 @@ import Swal from "sweetalert2";
 
 export const insertNew = async (title, body, images) => {
     try {
+        Swal.fire({
+            title: 'Subiendo noticia...',
+            text: 'Por favor, espera mientras se sube la noticia.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
         const newsDocRef = await addDoc(collection(db, "news"), {
             title: title,
             body: body,
@@ -21,15 +30,6 @@ export const insertNew = async (title, body, images) => {
             })
         );
 
-        Swal.fire({
-            title: 'Subiendo notivia...',
-            text: 'Por favor, espera mientras se sube la noticia.',
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
-
         await updateDoc(newsDocRef, {
             images: imageUrls
         });
@@ -45,9 +45,9 @@ export const insertNew = async (title, body, images) => {
             icon: 'error',
             title: "Error",
             text: "Error al añadir la noticia.",
-        })
+        });
     }
-}
+};
 
 export const getLatestNews = async (newsLimit) => {
     // Simulamos un retraso de 3 segundos

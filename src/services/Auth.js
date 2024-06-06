@@ -2,59 +2,62 @@ import { auth, storage } from "firebase.config";
 import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
+import { db } from '../../firebase.config'
 import Swal from "sweetalert2";
 
-// export const registerUser = async (formData) => {
-//     // Verificar si el nombre de usuario ya está registrado
-//     const usernameRef = doc(db, 'users', formData.registerUsername);
-//     const usernameDoc = await getDoc(usernameRef);
-
-//     if (usernameDoc.exists()) {
-//         Swal.fire({
-//             icon: 'error',
-//             title: "Error",
-//             text: "El nombre de usuario ya está registrado.",
-//         })
-//     } else {
-//         // Si el nombre de usuario no está registrado, procede con el registro
-//         createUserWithEmailAndPassword(auth, formData.registerEmail, formData.registerPassword)
-//             .then(() => {
-//                 Swal.fire({
-//                     icon: 'success',
-//                     title: '¡Registro exitoso!',
-//                     text: '¡Bienvenid@ ' + formData.registerUsername + '!',
-//                 }).then(() => {
-//                     window.location.href = '/login';
-//                 });
-//             })
-//             .catch((error) => {
-//                 Swal.fire({
-//                     icon: 'error',
-//                     title: "Error",
-//                     text: "Error al registrar el usuario:",
-//                 })
-//             });
-//     }
-// };
-
 export const registerUser = async (formData) => {
-    createUserWithEmailAndPassword(auth, formData.registerEmail, formData.registerPassword)
-        .then(() => {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Registro exitoso!',
-                text: '¡Bienvenid@ ' + formData.registerUsername + '!',
-            }).then(() => {
-                window.location.href = '/login';
-            });
-        })
-        .catch((error) => {
+    try {
+        const usernameRef = doc(db, 'users', formData.registerUsername);
+        const usernameDoc = await getDoc(usernameRef);
+
+        if (usernameDoc.exists()) {
             Swal.fire({
                 icon: 'error',
                 title: "Error",
-                text: "Error al registrar el usuario:",
-            })
+                text: "El nombre de usuario ya está registrado.",
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: 'Registrando usuario...',
+            text: 'Por favor, espera mientras se completa el registro.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
         });
+
+        const userCredential = await createUserWithEmailAndPassword(auth, formData.registerEmail, formData.registerPassword);
+        const user = userCredential.user;
+
+        await updateProfile(user, {
+            displayName: formData.registerUsername,
+            photoURL: 'https://firebasestorage.googleapis.com/v0/b/urblink-2b58e.appspot.com/o/default-avatar.jpg?alt=media&token=8c9a463d-83e6-4503-a2ed-5f0ea77b3257'
+        });
+
+        await setDoc(doc(db, 'users', user.uid), {
+            displayName: formData.registerUsername,
+            uid: user.uid,
+            email: formData.registerEmail,
+            photoURL: user.photoURL
+        });
+
+        Swal.fire({
+            icon: 'success',
+            title: '¡Registro exitoso!',
+            text: '¡Bienvenid@ ' + formData.registerUsername + '!',
+        }).then(() => {
+            window.location.href = '/login';
+        });
+
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: "Error",
+            text: "Error al registrar el usuario: " + error.message,
+        });
+    }
 };
 
 export const resetPassword = (email) => {
