@@ -6,7 +6,7 @@ import { useDarkMode } from 'src/contexts/darkModeContext';
 export default function MainLogo() {
     const { darkMode, toggleDarkMode } = useDarkMode(); 
     const srcImage = darkMode ?  '/media/png/logo_main_dark_mode.png' : '/media/png/logo_main.png';
-    const headerClass = darkMode ?  `${styles.main_logo_dark}` : `${styles.main_logo_light}`;
+    const headerClass = darkMode ?  `${styles.main_logo_light}` : `${styles.main_logo_light}`;
 
     const logoRef = useRef(null);
     const h2Ref = useRef(null);

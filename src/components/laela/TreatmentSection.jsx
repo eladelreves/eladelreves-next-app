@@ -12,12 +12,12 @@ export default function Treatment() {
     return (
         <>
             <div className={styles.laela_sections}>
-                <h2 className="animate_on_scroll">Tratamiento de la <span className='elaGreen'>ELA</span></h2>
-                <p className="animate_on_scroll">Los tratamientos <b>no pueden revertir el daño provocado</b> por la esclerosis lateral amiotrófica (<span className='elaGreen'>ELA</span>), pero <b>pueden retrasar la progresión de los síntomas</b>. También pueden evitar complicaciones y hacerte sentir más cómodo e independiente.</p>
-                <p>
+                <h2 className="animate-on-scroll">Tratamiento de la <span className='elaGreen'>ELA</span></h2>
+                <p className="animate-on-scroll">Los tratamientos <b>no pueden revertir el daño provocado</b> por la esclerosis lateral amiotrófica (<span className='elaGreen'>ELA</span>), pero <b>pueden retrasar la progresión de los síntomas</b>. También pueden evitar complicaciones y hacerte sentir más cómodo e independiente.</p>
+                <p className='animate-on-scroll'>
                     Es posible que necesites un equipo de proveedores de atención de la salud y médicos capacitados en muchas áreas para atenderte. El equipo trabaja en conjunto para <b>prolongar la supervivencia y mejorar la calidad de vida</b>.
                 </p>
-                <p className="animate_on_scroll">
+                <p className="animate-on-scroll">
                     Tu equipo trabaja para seleccionar los tratamientos adecuados para ti. <b>Tienes derecho a elegir o rechazar cualquiera</b> de los tratamientos sugeridos.
                 </p>
                 <div id={styles.medication_container}>

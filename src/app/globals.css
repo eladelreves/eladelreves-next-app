@@ -68,6 +68,7 @@ h2 {
   opacity: 0;
   transform: translateY(20px); /* O cualquier otra transformación que desees */
   transition: opacity 0.5s, transform 0.5s;
+  text-align: justify;
 }  
 
 .animate-on-scroll.animated {
