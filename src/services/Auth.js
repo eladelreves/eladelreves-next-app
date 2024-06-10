@@ -1,6 +1,7 @@
 import { auth, storage } from "firebase.config";
+import { query, where, getDocs } from "firebase/firestore";
 import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import { db } from '../../firebase.config'
 import Swal from "sweetalert2";
@@ -231,4 +232,37 @@ export const deleteVideo = async (videoUrl) => {
             }
         }
     });
+};
+
+export const updateUserDisplayName = async (currentUser, newDisplayName) => {
+    try {
+        await updateProfile(currentUser, {
+            displayName: newDisplayName,
+        });
+
+        const usersCollectionRef = collection(db, 'users');
+        const q = query(usersCollectionRef, where('uid', '==', currentUser.uid));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach(async (doc) => {
+            await updateDoc(doc.ref, {
+                displayName: newDisplayName
+            });
+        });
+
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: 'El nombre de usuario se actualizó correctamente.',
+        }).then(() => {
+            window.location.href = '/perfil';
+        });
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema al actualizar el nombre de usuario. Por favor, inténtalo de nuevo más tarde.',
+        });
+        console.error('Error al actualizar el nombre de usuario:', error);
+    }
 };

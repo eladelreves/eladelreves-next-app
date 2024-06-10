@@ -19,7 +19,6 @@ export function Navbar() {
     const srcImage = darkMode ?  '/media/png/logo_horizontal_dark_mode.png' : '/media/png/logo_horizontal.png';
     const boxShadow = darkMode ? '0px 4px 8px 0px rgba(255, 255, 255, 0.2)' : '0px 4px 8px 0px rgba(0, 0, 0, 0.2)';
 
-
     const { user, handleLogout } = useUser();
     const pathname = usePathname();
     const { visible, showShadow } = useNavbarScroll();
@@ -29,8 +28,8 @@ export function Navbar() {
         setTimeout(() => {
             setIsLoading(false);
         }, 300);
+    }, []);
 
-    }, [])
     const pages = [
         { name: 'Home', href: '/', icon: 'home.svg' },
         { name: 'La ELA', href: '/laela', icon: 'laela.svg' },
@@ -71,7 +70,8 @@ export function Navbar() {
                         }
 
                         return (
-                            <Link id={page.name === 'Perfil' ? 'clickable' : ''}
+                            <Link
+                                id={page.name === 'Perfil' || page.name === 'Login' ? 'clickable' : ''}
                                 key={page.name}
                                 href={page.href}
                                 className={pathname === page.href ? styles.actual_page : ''}
@@ -86,7 +86,11 @@ export function Navbar() {
                     })}
                 </nav>
                 <Tooltip className={styles.tooltip} anchorSelect="#clickable" clickable>
-                    <button onClick={handleLogout}>Cerrar Sesión</button>
+                    {user ? (
+                        <button onClick={handleLogout}>Cerrar Sesión</button>
+                    ) : (
+                        <span>Dark Mode</span>
+                    )}
                     <br />
                     <DarkModeToggleButton />
                 </Tooltip>

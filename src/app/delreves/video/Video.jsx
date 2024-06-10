@@ -5,7 +5,7 @@ export function Video({ video }){
         <div className={styles.div_con_video}>
             <span>@eladelrevés</span>
 
-            <video autoPlay loop controls>
+            <video autoPlay loop controls muted>
                 <source src={video} type="video/mp4"/>
                 Tu navegador no admite el elemento de video.
             </video>

@@ -1,9 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react';
 import styles from './delreves.module.css';
-import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
+import { getStorage, ref, listAll, getDownloadURL, getMetadata } from 'firebase/storage';
 import { Video } from './video/Video';
-import VideoForm from '@components/_common/videoForm/VideoForm'
 
 export default function Delreves() {
     const [videos, setVideos] = useState([]);
@@ -14,10 +13,15 @@ export default function Delreves() {
             const videosRef = ref(storage, 'videos');
             const videoList = await listAll(videosRef);
 
-            const urls = await Promise.all(videoList.items.map(async (item) => {
+            const videosWithMetadata = await Promise.all(videoList.items.map(async (item) => {
+                const metadata = await getMetadata(item);
                 const url = await getDownloadURL(item);
-                return url;
+                return { url, timeCreated: metadata.timeCreated };
             }));
+
+            videosWithMetadata.sort((a, b) => new Date(a.timeCreated) - new Date(b.timeCreated));
+
+            const urls = videosWithMetadata.map(video => video.url);
 
             setVideos(urls);
         } catch (error) {
@@ -29,7 +33,6 @@ export default function Delreves() {
         fetchVideos();
     }, []);
 
-
     return (
         <>
             <h2 id={styles.delreves_title}>Últimos <span className='elaGreen'>Videos</span></h2>
@@ -39,7 +42,6 @@ export default function Delreves() {
                     </Video>
                 ))}
             </div>
-            <h3 id={styles.delreves_title}>Descárgate la <span className='elaGreen'>app</span> para ver los vídeos de los retos y para contribuir con la causa!</h3>
             <br /><br />
         </>
     );

@@ -4,7 +4,7 @@ import './joinButton.css';
 export default function JoinButton() {
     return (
         <>
-            <Link href='/unete' id='joinButton' className="animate-on-scroll" title="Registrarse">
+            <Link href='/unete' id='joinButton' className="animate-on-scroll">
                 Únete
                 <svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 0H24V24H0z" fill="none"></path>

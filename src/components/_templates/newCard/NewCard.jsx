@@ -3,7 +3,7 @@ import styles from './newCard.module.css';
 
 export default function NewCard({ item }) {
     const extractImageId = (url) => {
-        const match = url.match(/%2F([^%]*)%2F[^%]*$/);
+        const match = url.match(/%2F([^%]+)%2F/);
         return match ? match[1] : null;
     };
 

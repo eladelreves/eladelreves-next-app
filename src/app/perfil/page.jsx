@@ -1,10 +1,9 @@
 'use client'
-
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './perfil.module.css'
 
 import { useUser } from "src/contexts/userContext";
-import { uploadProfilePhoto, fetchVideosByUser, deleteVideo } from '@services/Auth';
+import { uploadProfilePhoto, fetchVideosByUser, deleteVideo, updateUserDisplayName } from '@services/Auth';
 import Modal from 'react-modal';
 import VideoPlayer from './videoPlayer/VideoPlayer'
 import { RotatingLines } from 'react-loader-spinner';
@@ -13,11 +12,13 @@ import VideoForm from '@components/_common/videoForm/VideoForm';
 export default function Perfil() {
     const { user } = useUser();
     const [image, setImage] = useState('/icons/default.png');
-
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalUsernameIsOpen, setModalUsernameIsOpen] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [videos, setVideos] = useState([]);
-
+    const [newDisplayName, setNewDisplayName] = useState(user?.displayName || '');
+    const [isLoading, setIsLoading] = useState(true);
+    const loaderRef = useRef(null);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -32,6 +33,10 @@ export default function Perfil() {
         file && reader.readAsDataURL(file);
     };
 
+    const handleDisplayNameChange = (event) => {
+        setNewDisplayName(event.target.value);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setModalIsOpen(false);
@@ -39,15 +44,23 @@ export default function Perfil() {
         if (result) window.location.reload();
     };
 
-
-    const [isLoading, setIsLoading] = useState(true);
+    const handleDisplayNameUpdate = async () => {
+        event.preventDefault();
+        setIsLoading(true);
+        const success = await updateUserDisplayName(user, newDisplayName);
+        if (success) {
+            user.displayName = newDisplayName;
+            setModalUsernameIsOpen(false); 
+        }
+        setIsLoading(false);
+    };
 
     useEffect(() => {
-        setIsLoading(false);
         async function fetchVideos() {
             try {
                 const videos = await fetchVideosByUser(user);
                 setVideos(videos);
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error al obtener los videos:', error);
             }
@@ -64,7 +77,10 @@ export default function Perfil() {
                             <img src={user?.photoURL} alt="" />
                             <img onClick={() => setModalIsOpen(true)} src="/icons/edit.svg" alt="" />
                         </div>
-                        <span>{user?.email}</span>
+                        <div id={styles.display_name}>
+                            <span>Nombre de usuario: {user?.displayName}</span>
+                            <img src="/icons/edit.svg" alt="" onClick={() => setModalUsernameIsOpen(true)} />
+                        </div>
                     </>
                 }
 
@@ -103,7 +119,27 @@ export default function Perfil() {
                 </form>
                 <img src='/icons/close.svg' onClick={() => setModalIsOpen(false)} />
             </Modal>
-            <br /><br /><br />
+
+            <Modal id={styles.name_modal} isOpen={modalUsernameIsOpen} onRequestClose={() => setModalUsernameIsOpen(false)}>
+                <form onSubmit={handleDisplayNameUpdate}>
+                    <img src="/media/png/logo_main_amarillo.png" alt="" />
+                    <label htmlFor="newDisplayName">
+                        Nombre de usuario:
+                    </label>
+                    
+                    <input 
+                        type="text" 
+                        id={styles.newDisplayName}
+                        value={newDisplayName} 
+                        onChange={handleDisplayNameChange} 
+                    /><br />
+
+                    <input type="submit" value="Editar usuario" />
+                </form>
+                <img src='/icons/close.svg' onClick={() => setModalUsernameIsOpen(false)} />
+            </Modal>
+
+            <br />
             {videos?.length > 0 ? (
                 <>
                     <h2 className={styles.videos_title}>Tus <span className='elaGreen'>videos!</span></h2>
@@ -117,8 +153,10 @@ export default function Perfil() {
                                 deleteVideo={() => deleteVideo(videoUrl)}
                             />
                         ))}
-                        {isLoading && <div ref={loaderRef}></div>}
+                        {isLoading && <div ref={loaderRef}></div>} 
                     </div>
+                    <h3 id={styles.delreves_title}>Descárgate la <span className='elaGreen'>app</span> para subir más vídeos de los retos y para contribuir con la causa!</h3>
+                    <br /><br /><br />
                 </>
             ) : (
                 <>

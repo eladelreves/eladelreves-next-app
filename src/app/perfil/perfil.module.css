@@ -72,6 +72,23 @@
     transform: scale(1.2);
 }
 
+#display_name{
+    display: flex;
+    gap: 10px;
+}
+
+#display_name img:last-child {
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.5s;
+}
+
+#display_name img:last-child:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+
 #edit_modal {
     width: 400px;
     height: 400px;
@@ -105,6 +122,66 @@
     right: 0;
 }
 
+/* Modal displayName */
+
+#name_modal {
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#name_modal form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#name_modal label {
+    margin-top: 50px;
+    padding-bottom: 10px;
+}
+
+#name_modal form img {
+    width: 250px;
+    height: 150px;
+    margin: auto;
+}
+
+#name_modal form img {
+    width: 250px;
+    height: 150px;
+    margin: auto;
+}
+
+#name_modal > img {
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#newDisplayName{
+    padding: 5px;
+    font-size: 18px;
+}
+
+#name_modal input:last-child{
+    font-size: 15px;
+    padding: 10px;
+    border: 0px;
+    color: white;
+    background-color: #f5b942;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
 .videos_title{
     font-size: 36px;
     margin-top: 50px;
@@ -121,4 +198,11 @@
     gap: 25px;
     justify-content: center;
     position: relative;
+}
+
+#delreves_title{
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    color: var(--color);
 }

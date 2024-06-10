@@ -4,7 +4,7 @@ import NewCard2 from '@components/_templates/newCard/NewCard2';
 import styles from './gridContainer.module.css';
 import { getLatestNews } from '@services/News';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 4;
 
 export default function GridContainer() {
     const [newsData, setNewsData] = useState([]);
