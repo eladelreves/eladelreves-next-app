@@ -1,17 +1,18 @@
 'use client'
 
-import styles from './register.module.css'
-import { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import styles from './register.module.css';
 
 import PasswordInput from "@components/passwordInput/PasswordInput";
-import { registerUser } from '@services/Auth';
+import { isDisplayNameUnique, registerUser } from '@services/Auth';
 import { Tooltip } from 'react-tooltip';
+import Swal from 'sweetalert2';
 
-const usernameRegex = /^[a-zA-Z0-9]{3,}$/;
+const usernameRegex = /^[a-zA-Z0-9]{3,30}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()[\]{}<>;:,.~`])[A-Za-z\d!@#$%^&*()[\]{}<>;:,.~`]{8,}$/;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()[\]{}<>;:,.~`])[A-Za-z\d!@#$%^&*()[\]{}<>;:,.~`]{8,}$/;
 
 const validateField = (name, value, formData) => {
     switch (name) {
@@ -43,6 +44,10 @@ export default function Register() {
         registerPasswordConfirmation: false
     });
 
+    const hasErrors = () => {
+        return Object.values(errors).some(error => error === true);
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -62,9 +67,29 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (formData.registerPassword === formData.registerPasswordConfirmation) {
-            registerUser(formData);
+            if (hasErrors()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: "Error",
+                    text: "Revisa los datos introducidos.",
+                });
+            } else {
+                if (await isDisplayNameUnique(formData.registerUsername)) {
+                    registerUser(formData);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Error",
+                        text: "Nombre de usuario cogido.",
+                    });
+                }
+            }
         } else {
-            console.log('Ambas contraseñas deben coincidir');
+            Swal.fire({
+                icon: 'error',
+                title: "Error",
+                text: "Ambas contraseñas deben coincidir.",
+            });
         }
     };
 
@@ -99,11 +124,11 @@ export default function Register() {
                         {errors.registerUsername ? (
                             <span className={styles.error} id='username'>
                                 Nombre de usuario inválido ⓘ.
-                                <Tooltip 
-                                    className={styles.tooltip} 
-                                    anchorSelect="#username" 
+                                <Tooltip
+                                    className={styles.tooltip}
+                                    anchorSelect="#username"
                                     clickable
-                                    style={{backgroundColor: 'red'}}
+                                    style={{ backgroundColor: 'red' }}
                                     place='right'
                                 >
                                     <p>Debe de tener 3 caracteres mínimo, no debe tener espacios</p>
@@ -122,7 +147,7 @@ export default function Register() {
                             onChange={handleChange}
                         />
                         {errors.registerEmail ? <span className={styles.error}>Email inválido. Ejemplo: a@a.com</span> : <span className={styles.error}></span>}
-                        
+
                         <label htmlFor="registerPassword">Contraseña</label>
                         <PasswordInput
                             id={styles.registerPassword}
@@ -133,20 +158,20 @@ export default function Register() {
                         {errors.registerPassword ? (
                             <span className={styles.error} id='password'>
                                 Contraseña inválida ⓘ.
-                                <Tooltip 
-                                    className={styles.tooltip} 
-                                    anchorSelect="#password" 
+                                <Tooltip
+                                    className={styles.tooltip}
+                                    anchorSelect="#password"
                                     clickable
-                                    style={{backgroundColor: 'red'}}
+                                    style={{ backgroundColor: 'red' }}
                                     place='right'
                                 >
-                                    <p>La contraseña debe de tener 8 caracteres, al menos 1 símbolo y 1 número, no debe tener espacios.</p>
+                                    <p>La contraseña debe de tener 8 caracteres, al menos 1 símbolo, 1 número y una mayúscula, no debe tener espacios.</p>
                                 </Tooltip>
                             </span>
                         ) : (
                             <span className={styles.error}></span>
                         )}
-                        
+
 
                         <label htmlFor="registerPasswordConfirmation">Repetir Contraseña</label>
                         <PasswordInput

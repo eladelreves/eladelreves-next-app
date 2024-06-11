@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     gap: 16px;
     width: 80%;
+    min-height: 25vh;
     margin: 100px auto;
 }
 

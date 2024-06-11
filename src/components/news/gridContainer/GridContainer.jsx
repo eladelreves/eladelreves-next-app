@@ -1,8 +1,8 @@
 'use client'
-import React, { useState, useEffect } from 'react';
 import NewCard2 from '@components/_templates/newCard/NewCard2';
-import styles from './gridContainer.module.css';
 import { getLatestNews } from '@services/News';
+import { useEffect, useState } from 'react';
+import styles from './gridContainer.module.css';
 
 const ITEMS_PER_PAGE = 4;
 

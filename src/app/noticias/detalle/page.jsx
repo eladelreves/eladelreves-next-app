@@ -1,10 +1,10 @@
 'use client';
 
-import { getNewById, deleteNews } from "@services/News";
+import { deleteNews, getNewById } from "@services/News";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import styles from './detalle.module.css';
 import { useUser } from 'src/contexts/userContext';
+import styles from './detalle.module.css';
 
 export default function Detalle() {
     const [newsItem, setNewsItem] = useState(null);
@@ -41,14 +41,14 @@ export default function Detalle() {
         }
     }, [newsItem]);
 
-    const adminUID = 'mAtttYUrNsWUprl64bLYXQFfPl12';
+    const adminUID = 'MQGmx2uPZhYIgFNGEPrYYNUwZe52';
     const { user } = useUser();
 
     const currentUserUID = user ? user.uid : '0';
     const isAdmin = currentUserUID === adminUID;
 
     return (
-        <>
+        <div style={{ minHeight: '100vh' }}>
             {newsItem ? (
                 <>
                     <div id={styles.breadcrumbs}>
@@ -56,14 +56,14 @@ export default function Detalle() {
                     </div>
 
                     <div id={styles.news_detail}>
-                        {isAdmin && (
-                            <img 
-                                src="/icons/bin.svg" 
-                                id={styles.bin} 
+
+                        <h2 className="elaGreen" style={{ display: 'flex', alignItems: 'center' }}>{newsItem.title}{isAdmin && (
+                            <img
+                                src="/icons/bin.svg"
+                                id={styles.bin}
                                 onClick={() => deleteNews(urlParams.get('id'))}
                             />
-                        )}
-                        <h2 className="elaGreen">{newsItem.title}</h2>
+                        )}</h2>
                         <span id={styles.news_date}>{newsItem.createdAt.toDate().toDateString()}</span>
                         <div id={styles.news_body} dangerouslySetInnerHTML={{ __html: newsItem.body }}></div>
                         <div id={styles.news_images}>
@@ -75,8 +75,8 @@ export default function Detalle() {
                     </div>
                 </>
             ) : (
-                <div>Cargando...</div>
+                <div style={{ marginLeft: '40px', marginTop: '30px' }}>Cargando noticia...</div>
             )}
-        </>
+        </div>
     );
 }

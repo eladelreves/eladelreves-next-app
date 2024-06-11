@@ -1,10 +1,9 @@
 import { auth, storage } from "firebase.config";
-import { query, where, getDocs } from "firebase/firestore";
-import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { collection, doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
-import { db } from '../../firebase.config'
 import Swal from "sweetalert2";
+import { db } from '../../firebase.config';
 
 export const registerUser = async (formData) => {
     try {
@@ -85,7 +84,7 @@ export const login = async (formData) => {
             Swal.fire({
                 icon: 'error',
                 title: "Error",
-                text: "Error al iniciar sesión.",
+                text: "Correo y/o contraseña incorrecta.",
             })
         });
 }
@@ -125,6 +124,15 @@ export const uploadProfilePhoto = async (selectedFile, user) => {
         //Borrar anteriores
         const deletePromises = listResult.items.map(itemRef => deleteObject(itemRef));
         await Promise.all(deletePromises);
+
+        Swal.fire({
+            title: 'Subiendo imagen...',
+            text: 'Por favor, espera mientras se sube la foto.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
 
         const fileRef = ref(storageRef, selectedFile.name);
         await uploadBytes(fileRef, selectedFile);
@@ -180,6 +188,14 @@ export const uploadVideo = async (selectedFile, user) => {
             text: "Error al subir el video.",
         })
     };
+}
+
+export async function isDisplayNameUnique(displayName) {
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where('displayName', '==', displayName));
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot.empty);
+    return querySnapshot.empty;
 }
 
 export const fetchVideosByUser = async (user) => {
@@ -254,9 +270,7 @@ export const updateUserDisplayName = async (currentUser, newDisplayName) => {
             icon: 'success',
             title: '¡Éxito!',
             text: 'El nombre de usuario se actualizó correctamente.',
-        }).then(() => {
-            window.location.href = '/perfil';
-        });
+        })
     } catch (error) {
         Swal.fire({
             icon: 'error',

@@ -1,6 +1,6 @@
 import { db, storage } from "firebase.config";
-import { addDoc, collection, getDocs, getFirestore, orderBy, limit, query, serverTimestamp, updateDoc, getDoc, doc, deleteDoc } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Swal from "sweetalert2";
 
 export const insertNew = async (title, body, images) => {
@@ -36,7 +36,7 @@ export const insertNew = async (title, body, images) => {
 
         Swal.fire({
             icon: 'success',
-            title: '!Noticia añadida!',
+            title: '¡Noticia añadida!',
         }).then(() => {
             window.location.href = '/noticias';
         });
