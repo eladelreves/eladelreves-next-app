@@ -1,12 +1,12 @@
 'use client'
 import { useEffect, useRef } from 'react';
-import styles from './mainLogo.module.css'
-import { useDarkMode } from 'src/contexts/darkModeContext'; 
+import { useDarkMode } from 'src/contexts/darkModeContext';
+import styles from './mainLogo.module.css';
 
 export default function MainLogo() {
-    const { darkMode, toggleDarkMode } = useDarkMode(); 
-    const srcImage = darkMode ?  '/media/png/logo_main_dark_mode.png' : '/media/png/logo_main.png';
-    const headerClass = darkMode ?  `${styles.main_logo_light}` : `${styles.main_logo_light}`;
+    const { darkMode, toggleDarkMode } = useDarkMode();
+    const srcImage = darkMode ? '/media/png/logo_main_dark_mode.png' : '/media/png/logo_main.png';
+    const headerClass = `${styles.main_logo_light}`;
 
     const logoRef = useRef(null);
     const h2Ref = useRef(null);

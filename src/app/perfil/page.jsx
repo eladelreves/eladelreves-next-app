@@ -1,13 +1,14 @@
 'use client'
-import { useEffect, useState, useRef } from 'react';
-import styles from './perfil.module.css'
+import { useEffect, useRef, useState } from 'react';
+import styles from './perfil.module.css';
 
-import { useUser } from "src/contexts/userContext";
-import { uploadProfilePhoto, fetchVideosByUser, deleteVideo, updateUserDisplayName } from '@services/Auth';
-import Modal from 'react-modal';
-import VideoPlayer from './videoPlayer/VideoPlayer'
-import { RotatingLines } from 'react-loader-spinner';
 import VideoForm from '@components/_common/videoForm/VideoForm';
+import { deleteVideo, fetchVideosByUser, isDisplayNameUnique, updateUserDisplayName, uploadProfilePhoto } from '@services/Auth';
+import { RotatingLines } from 'react-loader-spinner';
+import Modal from 'react-modal';
+import { useUser } from "src/contexts/userContext";
+import Swal from 'sweetalert2';
+import VideoPlayer from './videoPlayer/VideoPlayer';
 
 export default function Perfil() {
     const { user } = useUser();
@@ -41,18 +42,38 @@ export default function Perfil() {
         event.preventDefault();
         setModalIsOpen(false);
         const result = await uploadProfilePhoto(selectedFile, user)
-        if (result) window.location.reload();
+        if (result) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Imagen actualizada!',
+            }).then(() => {
+                window.location.reload();
+            });
+        }
     };
 
-    const handleDisplayNameUpdate = async () => {
-        event.preventDefault();
-        setIsLoading(true);
-        const success = await updateUserDisplayName(user, newDisplayName);
-        if (success) {
-            user.displayName = newDisplayName;
-            setModalUsernameIsOpen(false); 
+    const handleDisplayNameUpdate = async (e) => {
+        e.preventDefault();
+        const usernameRegex = /^[a-zA-Z0-9]{3,30}$/;
+        if (
+            usernameRegex.test(newDisplayName) &&
+            user.displayName !== newDisplayName &&
+            await isDisplayNameUnique(newDisplayName)
+        ) {
+            setIsLoading(true);
+            const success = await updateUserDisplayName(user, newDisplayName);
+            if (success) {
+                user.displayName = newDisplayName;
+            }
+            setIsLoading(false);
+            setModalUsernameIsOpen(false);
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: "Error",
+                text: "Revisa los datos introducidos.",
+            });
         }
-        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -126,12 +147,12 @@ export default function Perfil() {
                     <label htmlFor="newDisplayName">
                         Nombre de usuario:
                     </label>
-                    
-                    <input 
-                        type="text" 
+
+                    <input
+                        type="text"
                         id={styles.newDisplayName}
-                        value={newDisplayName} 
-                        onChange={handleDisplayNameChange} 
+                        value={newDisplayName}
+                        onChange={handleDisplayNameChange}
                     /><br />
 
                     <input type="submit" value="Editar usuario" />
@@ -153,7 +174,7 @@ export default function Perfil() {
                                 deleteVideo={() => deleteVideo(videoUrl)}
                             />
                         ))}
-                        {isLoading && <div ref={loaderRef}></div>} 
+                        {isLoading && <div ref={loaderRef}></div>}
                     </div>
                     <h3 id={styles.delreves_title}>Descárgate la <span className='elaGreen'>app</span> para subir más vídeos de los retos y para contribuir con la causa!</h3>
                     <br /><br /><br />
