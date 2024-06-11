@@ -26,11 +26,11 @@ export default function AddNewForm() {
         e.preventDefault();
         let errorMessages = [];
 
-        if (title.length > 40) {
-            errorMessages.push('El título no debe exceder los 30 caracteres.');
+        if (title.length > 70) {
+            errorMessages.push('El título no debe exceder los 50 caracteres.');
         }
-        if (content.length > 2000) {
-            errorMessages.push('El contenido no debe exceder los 2000 caracteres.');
+        if (content.length > 4000) {
+            errorMessages.push('El contenido no debe exceder los 3000 caracteres.');
         }
         
         if (errorMessages.length > 0) {
