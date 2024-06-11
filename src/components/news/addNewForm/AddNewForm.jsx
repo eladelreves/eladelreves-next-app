@@ -1,12 +1,12 @@
 'use client';
 
-import styles from './addNewForm.module.css'
-import Modal from 'react-modal';
-import { useState } from 'react';
-import 'react-quill/dist/quill.snow.css';
 import { insertNew } from '@services/News';
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
+import Modal from 'react-modal';
+import 'react-quill/dist/quill.snow.css';
 import { useUser } from 'src/contexts/userContext';
+import styles from './addNewForm.module.css';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
     ssr: false,
@@ -32,7 +32,7 @@ export default function AddNewForm() {
         if (content.length > 4000) {
             errorMessages.push('El contenido no debe exceder los 3000 caracteres.');
         }
-        
+
         if (errorMessages.length > 0) {
             setErrors(errorMessages);
             return;
@@ -69,9 +69,9 @@ export default function AddNewForm() {
                     </button>
                 </div>
             )}
-            
+
             <Modal ariaHideApp={false} id={styles.add_new_form} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={{ content: { overflow: 'hidden' } }}>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} style={{ color: 'black' }}>
                     <input
                         type="text"
                         id="title"
